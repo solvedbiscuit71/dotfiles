@@ -1,0 +1,5 @@
+# exclude
+.git/*
+.backup/*
+nvim/plugin/*
+.DS_Store

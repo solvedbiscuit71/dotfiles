@@ -1,0 +1,7 @@
+{
+	"~/.biscuit/nvim": "~/.config/nvim",
+	"~/.biscuit/alacritty": "~/.config/alacritty",
+	"~/.biscuit/bash/.bashrc": ["~/.bashrc", "~/.bash_profile"],
+	"~/.biscuit/bash/.inputrc": "~/.inputrc",
+	"~/.biscuit/tmux/.tmux.conf": "~/.tmux.conf"
+}
