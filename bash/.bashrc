@@ -11,7 +11,7 @@ else
 	echo "Unknown OS: $OSTYPE"
 fi
 
-if [[ -z "$TMUX" ]]; then
+if [[ "$IN_ALACRITTY" ]] && [[ -z "$TMUX" ]]; then
 	tmux new-session -A -s main
 	exit
 fi
@@ -31,6 +31,8 @@ eval "$(jump shell bash)"
 alias nnn="nnn -CH -e"
 alias ls="ls -A"
 alias vim="nvim"
+alias lg="lazygit"
+alias venv="source .venv/bin/activate"
 
 # extra
 # java

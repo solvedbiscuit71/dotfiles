@@ -4,6 +4,7 @@ vim.opt.bufhidden = 'hide'
 vim.opt.clipboard = ''
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
+vim.opt.complete='.,w,b,u,t,i,kspell'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.mouse = 'a'
 vim.opt.pumheight = 10
@@ -13,7 +14,8 @@ vim.opt.scrolloff = 5
 vim.opt.shell = '/opt/homebrew/bin/bash'
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
-vim.opt.completeopt='menu,menuone,preview'
+vim.opt.signcolumn = 'yes'
+vim.opt.completeopt='menu,preview'
 vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
@@ -22,6 +24,7 @@ vim.opt.undofile = true
 vim.opt.updatetime = 500
 vim.opt.wrap = false
 vim.g.mapleader = ' '
+
 -- Plugin Installation
 
 local ensure_packer = function()
@@ -44,8 +47,18 @@ require('packer').startup(function(use)
 	use 'numToStr/Comment.nvim'
 	use 'nvim-lualine/lualine.nvim'
 	use 'nvim-treesitter/nvim-treesitter'
-	use 'shaunsingh/nord.nvim'
+	use { 'catppuccin/nvim', as = 'catppuccin' }
 	use 'windwp/nvim-autopairs'
+
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/nvim-cmp'
+	use 'L3MON4D3/LuaSnip'
+	use 'saadparwaiz1/cmp_luasnip'
+	use 'rafamadriz/friendly-snippets'
 
 	use { 'kylechui/nvim-surround', tag = '*', }
 	use { 'phaazon/hop.nvim', branch = 'v2' }
@@ -55,7 +68,29 @@ require('packer').startup(function(use)
 		require('packer').sync()
 	end
 end)
+
 -- Plugin Configuration
+
+require('catppuccin').setup({
+    transparent_background = true,
+    styles = {
+        comments = { 'italic' },
+        conditionals = { 'italic' },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+	integrations = {
+		hop = true,
+	}
+})
 
 require('nvim-autopairs').setup{}
 require('Comment').setup{}
@@ -83,23 +118,23 @@ require('nvim-treesitter.configs').setup {
 require('lualine').setup {
 	options = {
 		icons_enabled = false,
-		component_separators = '',
-		section_separators = '',
-		theme = 'nord',
+		component_separators = {},
+		section_separators = {},
+		theme = 'catppuccin',
 	},
 	sections = {
 		lualine_a = {'mode'},
-		lualine_b = {'branch'},
-		lualine_c = {{'filename', path=1}},
-		lualine_x = {},
+		lualine_b = {},
+		lualine_c = {'filename'},
+		lualine_x = {'encoding'},
 		lualine_y = {},
-		lualine_z = {},
+		lualine_z = {'progress'},
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {{'filename', path=1}},
-		lualine_x = {},
+		lualine_c = {'filename'},
+		lualine_x = {'encoding'},
 		lualine_y = {},
 		lualine_z = {},
 	},
@@ -125,21 +160,40 @@ require('telescope').setup {
 		},
 	},
 }
+
+require('luasnip.loaders.from_vscode').lazy_load()
+
+local cmp = require('cmp')
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-u>'] = cmp.mapping.scroll_docs(-4),
+		['<C-d>'] = cmp.mapping.scroll_docs(4),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+	}),
+	sources = cmp.config.sources({
+		{ name = 'path' },
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+		{ name = 'buffer' },
+	})
+})
+
+local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+lspconfig.pyright.setup {
+	capabilities = capabilities
+}
+
 -- Configuration
 
-vim.api.nvim_command('colorscheme nord')
-vim.api.nvim_command('hi Normal guibg=NONE ctermbg=NONE')
-
-vim.api.nvim_create_autocmd({'BufWinLeave'}, {
-  pattern = {'*.*'},
-  desc = 'save view (folds), when closing file',
-  command = 'mkview',
-})
-vim.api.nvim_create_autocmd({'BufWinEnter'}, {
-  pattern = {'*.*'},
-  desc = 'load view (folds), when opening file',
-  command = 'silent! loadview'
-})
+vim.api.nvim_command('colorscheme catppuccin')
+-- vim.api.nvim_command('hi Normal guibg=NONE ctermbg=NONE')
 
 vim.keymap.set('n', '<leader>n', ':Ex<CR>')
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files)
@@ -165,3 +219,28 @@ vim.keymap.set('n', '<C-b>', '<C-^>')
 
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
+
+vim.keymap.set({'i', 's'}, '<C-l>', function() require('luasnip').jump(1) end, {silent = true})
+vim.keymap.set({'i', 's'}, '<C-h>', function() require('luasnip').jump(-1) end, {silent = true})
+
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+	callback = function(ev)
+		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+		local opts = { buffer = ev.buf }
+		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+		vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+		vim.keymap.set('n', 'R', vim.lsp.buf.rename, opts)
+		vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+		vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, opts)
+		vim.keymap.set('i', '<C-space>', vim.lsp.buf.signature_help, opts)
+	end,
+})
