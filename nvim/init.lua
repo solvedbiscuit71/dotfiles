@@ -2,8 +2,8 @@
 
 vim.opt.bufhidden = 'hide'
 vim.opt.clipboard = ''
-vim.opt.cursorcolumn = true
-vim.opt.cursorline = true
+vim.opt.cursorcolumn = false
+vim.opt.cursorline = false
 vim.opt.complete='.,w,b,u,t,i,kspell'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.mouse = 'a'
@@ -49,6 +49,7 @@ require('packer').startup(function(use)
 	use 'nvim-treesitter/nvim-treesitter'
 	use { 'catppuccin/nvim', as = 'catppuccin' }
 	use 'windwp/nvim-autopairs'
+	use 'luukvbaal/nnn.nvim'
 
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -121,6 +122,9 @@ require('lualine').setup {
 		component_separators = {},
 		section_separators = {},
 		theme = 'catppuccin',
+		disabled_filetypes = {
+			statusline = {'nnn'},
+		},
 	},
 	sections = {
 		lualine_a = {'mode'},
@@ -139,6 +143,21 @@ require('lualine').setup {
 		lualine_z = {},
 	},
 }
+
+require('nnn').setup({
+	picker = {
+		cmd = 'nnn -CH',
+		style = {
+			width = 0.5,
+			height = 0.5,
+			xoffset = 0.5,
+			yoffset = 0.5,
+			border = 'rounded',
+		},
+		tabs = false,
+		fullscreen = false,
+	},
+})
 
 require('substitute').setup {
 	yank_substituted_text = false,
@@ -186,16 +205,17 @@ cmp.setup({
 
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.pyright.setup {
-	capabilities = capabilities
-}
+lspconfig.pyright.setup { capabilities = capabilities, }
+lspconfig.clangd.setup{ capabilities = capabilities, }
+lspconfig.html.setup { capabilities = capabilities, }
+lspconfig.cssls.setup { capabilities = capabilities, }
+lspconfig.tsserver.setup{ capabilities = capabilities, }
 
 -- Configuration
 
 vim.api.nvim_command('colorscheme catppuccin')
--- vim.api.nvim_command('hi Normal guibg=NONE ctermbg=NONE')
 
-vim.keymap.set('n', '<leader>n', ':Ex<CR>')
+vim.keymap.set('n', '<leader>n', ':NnnPicker %:p:h<CR>')
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files)
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers)
 vim.keymap.set('n', '<leader>s', require('telescope.builtin').live_grep)

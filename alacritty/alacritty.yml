@@ -14,7 +14,7 @@ window:
 
   title: Alacritty
   dynamic_title: false
-  opacity: 0.9
+  opacity: 0.8
   decorations: buttonless
   startup_mode: Maximized
 
@@ -24,7 +24,7 @@ mouse:
 
 # Fonts Setting
 font:
-  size: 20
+  size: 22
   builtin_box_drawing: true
 
   normal:
