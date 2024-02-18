@@ -1,7 +1,7 @@
 {
-	"~/.biscuit/nvim": "~/.config/nvim",
-	"~/.biscuit/alacritty": "~/.config/alacritty",
-	"~/.biscuit/bash/.bashrc": ["~/.bashrc", "~/.bash_profile"],
-	"~/.biscuit/bash/.inputrc": "~/.inputrc",
-	"~/.biscuit/tmux/.tmux.conf": "~/.tmux.conf"
+	"~/.solvedbiscuit71/nvim": "~/.config/nvim",
+	"~/.solvedbiscuit71/alacritty": "~/.config/alacritty",
+	"~/.solvedbiscuit71/bash/.bashrc": ["~/.bashrc", "~/.bash_profile"],
+	"~/.solvedbiscuit71/bash/.inputrc": "~/.inputrc",
+	"~/.solvedbiscuit71/tmux/.tmux.conf": "~/.tmux.conf"
 }

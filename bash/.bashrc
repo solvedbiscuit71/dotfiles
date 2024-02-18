@@ -57,5 +57,5 @@ PATH="~/.local/bin:$PATH"
 # else...
 
 # PATH
-PATH="${PATH}:~/.biscuit/.script"
+PATH="${PATH}:~/.solvedbiscuit71/.script"
 export PATH
