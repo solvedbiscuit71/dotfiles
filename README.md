@@ -45,6 +45,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install bash bash-completion fzf gcc git lazygit neovim nnn python3 tmux zoxide
 ```
 
+### python3
+
+For macOS, I recommend installing python3 from the official website [Python.org](https://www.python.org/downloads/) and the supported version is 3.12
+
 ## Nerd Font
 
 ```sh

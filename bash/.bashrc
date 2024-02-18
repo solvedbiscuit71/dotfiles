@@ -51,8 +51,10 @@ export GOPATH="$HOME/.go"
 PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
 # python 3.12
+# if macOS
 PATH="~/Library/Python/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
-PATH="/Users/solvedbiscuit71/.local/bin:$PATH"
+PATH="~/.local/bin:$PATH"
+# else...
 
 # PATH
 PATH="${PATH}:~/.biscuit/.script"
