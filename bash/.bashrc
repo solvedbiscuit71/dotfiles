@@ -1,18 +1,18 @@
 # brew
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-	[[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]] && . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]] && . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-	[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 else
-	echo "Unknown OS: $OSTYPE"
+    echo "Unknown OS: $OSTYPE"
 fi
 
 # tmux
 if [[ "$IN_ALACRITTY" ]] && [[ -z "$TMUX" ]]; then
-	tmux new-session -A -s main
-	exit
+    tmux new-session -A -s main
+    exit
 fi
 
 # environment variables
@@ -23,14 +23,12 @@ HISTFILESIZE=10000
 HISTSIZE=2000
 HISTTIMEFORMAT="%F %T "
 stty -ixon
-shopt -s autocd
 
 # alias
-alias nnn="nnn -CH -e"
-alias ls="ls -A"
-alias vim="nvim"
 alias lg="lazygit"
-alias venv="source .venv/bin/activate"
+alias ls="ls -A"
+alias nnn="nnn -CH -e"
+alias vim="nvim"
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -54,7 +52,7 @@ PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 # if macOS
 PATH="~/Library/Python/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
 PATH="~/.local/bin:$PATH"
-# else...
+# else
 
 # PATH
 PATH="${PATH}:~/.solvedbiscuit71/.script"
