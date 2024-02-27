@@ -50,6 +50,11 @@ require('packer').startup(function(use)
     use 'numToStr/Comment.nvim'
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        after = 'nvim-treesitter',
+        requires = 'nvim-treesitter/nvim-treesitter',
+    }
     use { 'catppuccin/nvim', as = 'catppuccin' }
     use 'windwp/nvim-autopairs'
     use 'luukvbaal/nnn.nvim'
@@ -79,14 +84,14 @@ require('catppuccin').setup({
     transparent_background = true,
     styles = {
         comments = { 'italic' },
-        conditionals = { 'italic' },
+        conditionals = {},
         loops = {},
         functions = {},
         keywords = {},
-        strings = {},
+        strings = { 'italic' },
         variables = {},
         numbers = {},
-        booleans = {},
+        booleans = { 'italic' },
         properties = {},
         types = {},
         operators = {},
@@ -113,6 +118,22 @@ require('nvim-treesitter.configs').setup {
                 return true
             end
         end,
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ['ap'] = '@parameter.outer',
+                ['ip'] = '@parameter.inner',
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+                ['am'] = '@comment.outer',
+                ['im'] = '@comment.inner',
+            },
+        },
     },
     indent = {
         enable = true
@@ -221,6 +242,7 @@ vim.api.nvim_command('colorscheme catppuccin')
 vim.keymap.set('n', '<leader>n', ':NnnPicker %:p:h<CR>')
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files)
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers)
+vim.keymap.set('n', '<leader>r', require('telescope.builtin').registers)
 vim.keymap.set('n', '<leader>s', require('telescope.builtin').live_grep)
 
 vim.keymap.set({'n','x','o'}, 'go', ':HopChar1<CR>')
