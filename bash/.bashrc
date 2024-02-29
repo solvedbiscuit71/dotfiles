@@ -32,10 +32,6 @@ alias vim="nvim"
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # zoxide
 eval "$(zoxide init --cmd cd bash)"
@@ -48,12 +44,18 @@ PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
 export GOPATH="$HOME/.go"
 PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
-# python 3.12
-# if macOS
-PATH="~/Library/Python/3.12/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:${PATH}"
-PATH="~/.local/bin:$PATH"
-# else
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
-# PATH
-PATH="${PATH}:~/.solvedbiscuit71/.script"
+# poetry
+PATH="~/.local/bin:$PATH"
+export POETRY_VIRTUALENVS_IN_PROJECT=1
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 export PATH

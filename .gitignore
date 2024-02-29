@@ -1,4 +1,7 @@
 # exclude
+.script/*
+!.script/init.py
+!.script/deinit.py
 .git/*
 .backup/*
 nvim/plugin/*

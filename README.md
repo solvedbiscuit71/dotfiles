@@ -42,12 +42,8 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Installation
 
 ```sh
-brew install bash bash-completion fzf gcc git lazygit neovim nnn python3 tmux zoxide
+brew install bash bash-completion fzf gcc git lazygit neovim nnn tmux zoxide
 ```
-
-### python3
-
-For macOS, I recommend installing python3 from the official website [Python.org](https://www.python.org/downloads/) and the supported version is 3.12
 
 ## Nerd Font
 
@@ -122,4 +118,29 @@ defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
 
 ```sh
 brew install --cask amethyst spaceid
+```
+
+## Programming Language
+
+### Python
+
+Using pyenv to manage different python version, and using poetry for managing virtual environments and packages.
+```sh
+brew update
+brew install pyenv
+```
+
+Current LTS python version is 3.11 so install python3.11 using pyenv and make it default
+```sh
+pyenv install 3.11
+pyenv global 3.11
+```
+
+### Node
+
+Using nvm to manage different node version, follow the [nvm](https://github.com/nvm-sh/nvm) github to install nvm.  
+
+To set a default node version
+```sh
+nvm alias default <version>
 ```
