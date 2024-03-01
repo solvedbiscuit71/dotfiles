@@ -92,8 +92,8 @@ Once installed, enter tmux and enter the following sequence `PREFIX I` to instal
 # Setup
 
 ```sh
-git clone https://github.com/solvedbiscuit71/.solvedbiscuit71.git ~/.solvedbiscuit71
-cd ~/.solvedbiscuit71
+git clone https://github.com/solvedbiscuit71/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ```
 
 ## Install
