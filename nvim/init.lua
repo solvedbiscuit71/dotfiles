@@ -52,7 +52,6 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter',
         requires = 'nvim-treesitter/nvim-treesitter',
     }
     use { 'catppuccin/nvim', as = 'catppuccin' }
@@ -199,7 +198,6 @@ require('telescope').setup {
     pickers = {
         find_files = {
             follow = true,
-            hidden = true,
         },
     },
 }
@@ -217,7 +215,7 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-j>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = cmp.config.sources({
         { name = 'path' },
@@ -241,8 +239,9 @@ vim.api.nvim_command('colorscheme catppuccin')
 
 vim.keymap.set('n', '<leader>n', ':NnnPicker %:p:h<CR>')
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files)
+vim.keymap.set('n', '<leader>g', function() require('telescope.builtin').find_files({ hidden=true }) end)
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers)
-vim.keymap.set('n', '<leader>r', require('telescope.builtin').registers)
+vim.keymap.set('n', '<leader>r', require('telescope.builtin').oldfiles)
 vim.keymap.set('n', '<leader>s', require('telescope.builtin').live_grep)
 
 vim.keymap.set({'n','x','o'}, 'go', ':HopChar1<CR>')
@@ -273,19 +272,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-        local opts = { buffer = ev.buf }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', 'R', vim.lsp.buf.rename, opts)
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-        vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, opts)
-        vim.keymap.set('i', '<C-space>', vim.lsp.buf.signature_help, opts)
-    end,
-})
+vim.keymap.set('i', '<C-space>', vim.lsp.buf.signature_help)
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.references)
+vim.keymap.set({'n','v'}, '<leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', 'R', vim.lsp.buf.rename)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)

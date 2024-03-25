@@ -44,14 +44,13 @@ PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
 export GOPATH="$HOME/.go"
 PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
+# rust
+. "$HOME/.cargo/env"
+
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-# poetry
-PATH="~/.local/bin:$PATH"
-export POETRY_VIRTUALENVS_IN_PROJECT=1
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
