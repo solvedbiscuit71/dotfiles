@@ -1,77 +1,29 @@
 [colors]
 draw_bold_text_with_bright_colors = true
 
-[[colors.indexed_colors]]
-color = "#FAB387"
-index = 16
-
-[[colors.indexed_colors]]
-color = "#F5E0DC"
-index = 17
-
-[colors.bright]
-black = "#585B70"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#A6ADC8"
-yellow = "#F9E2AF"
-
-[colors.cursor]
-cursor = "#F5E0DC"
-text = "#1E1E2E"
-
-[colors.dim]
-black = "#45475A"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#BAC2DE"
-yellow = "#F9E2AF"
-
-[colors.hints.end]
-background = "#A6ADC8"
-foreground = "#1E1E2E"
-
-[colors.hints.start]
-background = "#F9E2AF"
-foreground = "#1E1E2E"
+[colors.primary]
+background = "#0c0c16"
+foreground = "#d8dee9"
 
 [colors.normal]
-black = "#45475A"
-blue = "#89B4FA"
-cyan = "#94E2D5"
-green = "#A6E3A1"
-magenta = "#F5C2E7"
-red = "#F38BA8"
-white = "#BAC2DE"
-yellow = "#F9E2AF"
+black   = "#2c2c3d"
+red     = "#ff6e6e"
+green   = "#9ec875"
+yellow  = "#ffa759"
+blue    = "#70a7d4"
+magenta = "#d291e0"
+cyan    = "#96e0e0"
+white   = "#d8dee9"
 
-[colors.primary]
-background = "#1E1E2E"
-bright_foreground = "#CDD6F4"
-dim_foreground = "#CDD6F4"
-foreground = "#CDD6F4"
-
-[colors.search.focused_match]
-background = "#A6E3A1"
-foreground = "#1E1E2E"
-
-[colors.search.matches]
-background = "#A6ADC8"
-foreground = "#1E1E2E"
-
-[colors.selection]
-background = "#F5E0DC"
-text = "#1E1E2E"
-
-[colors.vi_mode_cursor]
-cursor = "#B4BEFE"
-text = "#1E1E2E"
+[colors.bright]
+black   = "#414166"
+red     = "#ff8d8d"
+green   = "#b3d987"
+yellow  = "#ffc57f"
+blue    = "#9bb3d3"
+magenta = "#ffa1ff"
+cyan    = "#9cd8d8"
+white   = "#ffffff"
 
 [env]
 IN_ALACRITTY = "yes"
@@ -103,10 +55,10 @@ hide_when_typing = true
 [window]
 decorations = "buttonless"
 dynamic_title = false
-opacity = 0.8
+opacity = 0.7
 startup_mode = "Maximized"
 title = "Alacritty"
 
 [window.padding]
-x = 4
-y = 4
+x = 0
+y = 0

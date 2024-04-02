@@ -9,6 +9,7 @@ vim.opt.cursorcolumn = false
 vim.opt.cursorline = false
 vim.opt.expandtab = true
 vim.opt.fileencoding = 'utf-8'
+vim.opt.hlsearch = false
 vim.opt.list = true
 vim.opt.listchars='trail:∙,lead:∙,eol:↵,nbsp:␣,tab:→ '
 vim.opt.mouse = 'a'
@@ -52,6 +53,7 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        after = "nvim-treesitter",
         requires = 'nvim-treesitter/nvim-treesitter',
     }
     use { 'catppuccin/nvim', as = 'catppuccin' }
@@ -108,6 +110,7 @@ require('hop').setup{}
 require('nvim-treesitter.configs').setup {
     ensure_installed = { 'bash', 'c', 'lua', 'markdown', 'vim', 'vimdoc', 'query' },
     auto_install = true,
+    ignore_install = { 'tmux' },
     highlight = {
         enable = true,
         disable = function(lang, buf)
@@ -142,8 +145,8 @@ require('nvim-treesitter.configs').setup {
 require('lualine').setup {
     options = {
         icons_enabled = false,
-        component_separators = {},
-        section_separators = {},
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
         theme = 'catppuccin',
         disabled_filetypes = {
             statusline = {'nnn'},
@@ -151,17 +154,17 @@ require('lualine').setup {
     },
     sections = {
         lualine_a = {'mode'},
-        lualine_b = {},
+        lualine_b = {'branch'},
         lualine_c = {'filename'},
         lualine_x = {'encoding'},
-        lualine_y = {},
+        lualine_y = {'filetype'},
         lualine_z = {'progress'},
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {'filename'},
-        lualine_x = {'encoding'},
+        lualine_x = {'progress'},
         lualine_y = {},
         lualine_z = {},
     },
@@ -215,7 +218,7 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-j>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     }),
     sources = cmp.config.sources({
         { name = 'path' },
