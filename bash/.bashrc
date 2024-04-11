@@ -10,10 +10,10 @@ else
 fi
 
 # tmux
-if [[ "$IN_ALACRITTY" ]] && [[ -z "$TMUX" ]]; then
-    tmux new-session -A -s main
-    exit
-fi
+# if [[ "$IN_ALACRITTY" ]] && [[ -z "$TMUX" ]]; then
+#     tmux new-session -A -s main
+#     exit
+# fi
 
 # environment variables
 export PS1="\[\e[32m\]\u\[\e[m\]@\h \[\e[34m\]\W\[\e[m\] \\$ "
