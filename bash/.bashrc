@@ -1,4 +1,4 @@
-# brew
+# Homebrew (OS-specific)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]] && . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
@@ -9,14 +9,8 @@ else
     echo "Unknown OS: $OSTYPE"
 fi
 
-# tmux
-# if [[ "$IN_ALACRITTY" ]] && [[ -z "$TMUX" ]]; then
-#     tmux new-session -A -s main
-#     exit
-# fi
-
-# environment variables
-export PS1="\[\e[32m\]\u\[\e[m\]@\h \[\e[34m\]\W\[\e[m\] \\$ "
+# User defined env
+export PS1="\[\e[m\]\[\e[34m\]\W\[\e[m\] \\$ "
 export VISUAL=nvim
 HISTCONTROL=ignorespace
 HISTFILESIZE=10000
@@ -24,35 +18,35 @@ HISTSIZE=2000
 HISTTIMEFORMAT="%F %T "
 stty -ixon
 
-# alias
+# User defined alias
 alias lg="lazygit"
 alias ls="ls -A"
 alias nnn="nnn -CH -e"
 alias vim="nvim"
 
-# fzf
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# zoxide
+# Zoxide
 eval "$(zoxide init --cmd cd bash)"
 
-# java
+# Java
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
 
-# go
+# Go
 export GOPATH="$HOME/.go"
 PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
-# rust
+# Rust
 . "$HOME/.cargo/env"
 
-# pyenv
+# Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# nvm
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
