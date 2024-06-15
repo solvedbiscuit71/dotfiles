@@ -10,7 +10,7 @@ else
 fi
 
 # User defined env
-export PS1="\[\e[m\]\[\e[34m\]\W\[\e[m\] \\$ "
+export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\W\[\e[m\]\\$ "
 export VISUAL=nvim
 HISTCONTROL=ignorespace
 HISTFILESIZE=10000
