@@ -25,6 +25,7 @@ if vim.g.vscode then
 else
     -- Neovim only
     vim.g.mapleader = ' '
+    vim.g.python3_host_prog = '~/.pyenv/shims/python3'
     vim.opt.bufhidden = 'hide'
     vim.opt.clipboard = ''
     vim.opt.complete='.,w,b,u,t,i,kspell'

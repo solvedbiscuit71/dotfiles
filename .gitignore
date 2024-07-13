@@ -6,3 +6,5 @@
 .backup/*
 nvim/plugin/*
 .DS_Store
+karabiner/node_modules
+karabiner/automatic_backups

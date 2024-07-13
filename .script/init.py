@@ -23,7 +23,7 @@ if not os.path.isdir(".backup"):
 for path in links:
     if os.path.exists(path[1]) and not os.path.islink(path[1]):
         shutil.move(path[1], ".backup")
-        
+
 if not os.path.isdir(f"{HOME}/.config"):
     os.mkdir(f"{HOME}/.config")
 

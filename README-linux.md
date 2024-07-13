@@ -1,17 +1,24 @@
+Disclaimer: This README-linux.md file is kept for archive purposes only. These commands are not tested in linux machine.
+
 # Prerequisites
 
+1. Developer Toolkit
 ```sh
-xcode-select --install
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential git curl
 ```
 
-2. Homebrew
+2. Linuxbrew
 ```sh
-/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+/bin/bash install.sh
 ```
+
 ## Add brew to $PATH
 
 ```sh
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ```
 
 # Installation
@@ -22,19 +29,23 @@ brew install bash bash-completion fzf gcc git lazygit neovim nnn tmux zoxide
 
 ## Nerd Font
 
-This repo uses [zed-fonts](https://github.com/zed-industries/zed-fonts) for alacritty. you can follow the github's README to build it.
+```sh
+brew tap homebrew/cask-fonts &&
+brew install --cask font-victor-mono-nerd-font
+```
+
+Or, download from [VictorMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/VictorMono.zip)
+```sh
+mkdir -p $HOME/.local/share/fonts
+sudo cp $HOME/Downloads/TTF/* $HOME/.local/share/fonts
+fc-cache -f -v
+```
 
 ## Bash
 
 ```sh
-echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
-chsh -s /opt/homebrew/bin/bash
-```
-
-## Alacritty
-
-```sh
-brew install --cask alacritty
+echo '/home/linuxbrew/.linuxbrew/bin/bash' | sudo tee -a /etc/shells
+chsh -s /home/linuxbrew/.linuxbrew/bin/bash
 ```
 
 ## TPM
@@ -62,26 +73,6 @@ python3 .script/init.py
 python3 .script/deinit.py
 ```
 
-# Postrequisites
-
-## Disable dock delay
-
-```sh
-defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
-```
-
-## Tiling window manager
-
-```sh
-brew install --cask amethyst spaceid
-```
-
-## Karabiner-Elements
-
-```sh
-brew install --cask karabiner-elements
-```
-
 ## Programming Language
 
 ### Python
@@ -100,7 +91,7 @@ pyenv global 3.11
 
 ### Node
 
-Using nvm to manage different node version, follow the [nvm](https://github.com/nvm-sh/nvm) github to install nvm.
+Using nvm to manage different node version, follow the [nvm](https://github.com/nvm-sh/nvm) github to install nvm.  
 
 To set a default node version
 ```sh
