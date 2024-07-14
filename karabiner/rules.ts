@@ -42,6 +42,7 @@ const rules: KarabinerRules[] = [
 
     // r = "Raycast"
     r: {
+      h: open("raycast://extensions/raycast/floating-notes/toggle-floating-notes-window"),
       j: open("raycast://extensions/raycast/clipboard-history/clipboard-history"),
       k: open("raycast://extensions/raycast/dictionary/define-word"),
       l: open("raycast://extensions/mblode/google-search/index"),
@@ -197,7 +198,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       global: {
-        show_in_menu_bar: false,
+        show_in_menu_bar: true,
       },
       profiles: [
         {
