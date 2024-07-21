@@ -38,6 +38,8 @@ const rules: KarabinerRules[] = [
       l: app("Finder"),
       n: app("VSCodium"),
       semicolon: app("System Settings"),
+      u: app("UTM"),
+      o: app("Zotero"),
     },
 
     // r = "Raycast"
