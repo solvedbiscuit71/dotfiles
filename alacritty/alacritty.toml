@@ -33,19 +33,19 @@ builtin_box_drawing = true
 size = 22
 
 [font.bold]
-family = "Zed Mono"
+family = "ZedMono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "Zed Mono"
+family = "ZedMono Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "Zed Mono"
+family = "ZedMono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "Zed Mono"
+family = "ZedMono Nerd Font"
 style = "Regular"
 
 [mouse]
@@ -55,8 +55,8 @@ hide_when_typing = true
 startup_mode = "Maximized"
 decorations = "buttonless"
 dynamic_title = false
-opacity = 0.8
-blur = false
+opacity = 0.7
+blur = true
 
 [window.padding]
 x = 4

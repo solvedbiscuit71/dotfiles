@@ -33,7 +33,7 @@ const rules: KarabinerRules[] = [
     // I use spacebar as the app launcher
     spacebar: {
       h: app("Obsidian"),
-      j: app("Safari"),
+      j: app("Arc"),
       k: app("Alacritty"),
       l: app("Finder"),
       n: app("VSCodium"),
@@ -139,6 +139,15 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
+      // Notification center
+      n: {
+        to: [
+          {
+            key_code: "quote",
+            modifiers: ["left_control"],
+          },
+        ],
+      },
     },
 
 
@@ -200,7 +209,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       global: {
-        show_in_menu_bar: true,
+        show_in_menu_bar: false,
       },
       profiles: [
         {

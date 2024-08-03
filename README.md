@@ -22,7 +22,7 @@ brew install bash bash-completion fzf gcc git lazygit neovim nnn tmux zoxide
 
 ## Nerd Font
 
-This repo uses [zed-fonts](https://github.com/zed-industries/zed-fonts) for alacritty. you can follow the github's README to build it.
+This repo uses [ZedMono Nerd Font](https://www.nerdfonts.com/#home) for terminal emulator.
 
 ## Bash
 
