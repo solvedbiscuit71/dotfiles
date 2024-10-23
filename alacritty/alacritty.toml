@@ -1,29 +1,32 @@
 [colors]
 draw_bold_text_with_bright_colors = true
 
+# Default colors
 [colors.primary]
-background = "#0c0c16"
-foreground = "#d8dee9"
+background = '#1a1b26'
+foreground = '#a9b1d6'
 
+# Normal colors
 [colors.normal]
-black   = "#2c2c3d"
-red     = "#ff6e6e"
-green   = "#9ec875"
-yellow  = "#ffa759"
-blue    = "#70a7d4"
-magenta = "#d291e0"
-cyan    = "#96e0e0"
-white   = "#d8dee9"
+black   = '#32344a'
+red     = '#f7768e'
+green   = '#9ece6a'
+yellow  = '#e0af68'
+blue    = '#7aa2f7'
+magenta = '#ad8ee6'
+cyan    = '#449dab'
+white   = '#787c99'
 
+# Bright colors
 [colors.bright]
-black   = "#414166"
-red     = "#ff8d8d"
-green   = "#b3d987"
-yellow  = "#ffc57f"
-blue    = "#9bb3d3"
-magenta = "#ffa1ff"
-cyan    = "#9cd8d8"
-white   = "#ffffff"
+black   = '#444b6a'
+red     = '#ff7a93'
+green   = '#b9f27c'
+yellow  = '#ff9e64'
+blue    = '#7da6ff'
+magenta = '#bb9af7'
+cyan    = '#0db9d7'
+white   = '#acb0d0'
 
 [env]
 TERM = "xterm-256color"
@@ -49,14 +52,14 @@ family = "ZedMono Nerd Font"
 style = "Regular"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [window]
-startup_mode = "Maximized"
-decorations = "buttonless"
+startup_mode = "Windowed"
+decorations = "Full"
 dynamic_title = false
-opacity = 0.7
-blur = true
+opacity = 1
+blur = false
 
 [window.padding]
 x = 4
