@@ -883,7 +883,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -910,10 +910,12 @@ require('lazy').setup({
         replace = {
           -- Abbreviated as Global Substitute
           prefix = 'gs',
+          desc = 'Global Substitute',
         },
         sort = {
           -- Abbreviated as Global Arrange
           prefix = 'ga',
+          desc = 'Global Arrange (Lexicographical)',
         },
       }
 
@@ -924,11 +926,11 @@ require('lazy').setup({
       -- require('mini.jump').setup()
 
       -- Jump within visible area
-      require('mini.jump2d').setup {
-        mappings = {
-          start_jumping = 'go',
-        },
-      }
+      -- require('mini.jump2d').setup {
+      --   mappings = {
+      --     start_jumping = 'go',
+      --   },
+      -- }
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -982,7 +984,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
