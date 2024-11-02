@@ -29,11 +29,11 @@ return {
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<leader>ds', dap.continue, desc = '[D]ebug [S]tart' },
+      { '<leader>ds', dap.continue, desc = '[D]ebug [S]tart/Continue' },
       { ']n', dap.step_over, desc = 'Debug: Step Over' },
       { ']i', dap.step_into, desc = 'Debug: Step Into' },
       { '[i', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>bb', dap.toggle_breakpoint, desc = 'Toggle [B]reakpoint' },
+      { '<leader>bb', dap.toggle_breakpoint, desc = 'Set [B]reakpoint' },
       {
         '<leader>bc',
         function()
@@ -42,7 +42,9 @@ return {
         desc = 'Set [B]reakpoint with [C]ondition',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<leader>dt', dapui.toggle, desc = '[D]ebug [T]oggle UI' },
+      { '<leader>do', dapui.open, desc = '[D]ebug [O]pen' },
+      { '<leader>dc', dapui.close, desc = '[D]ebug [C]lose UI' },
+      { '<C-k>', dapui.eval, desc = 'Evaluate expression under cursor' },
       unpack(keys),
     }
   end,
@@ -70,30 +72,47 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
-    -- dapui.setup {
-    -- Set icons to characters that are more likely to work in every terminal.
-    --    Feel free to remove or use ones that you like more! :)
-    --    Don't feel like these are good choices.
-    -- icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-    -- controls = {
-    --   icons = {
-    --     pause = '⏸',
-    --     play = '▶',
-    --     step_into = '⏎',
-    --     step_over = '⏭',
-    --     step_out = '⏮',
-    --     step_back = 'b',
-    --     run_last = '▶▶',
-    --     terminate = '⏹',
-    --     disconnect = '⏏',
-    --   },
-    -- },
-    -- }
-    dapui.setup()
+    dapui.setup {
+      controls = {
+        enabled = false,
+      },
+      layouts = {
+        {
+          elements = {
+            {
+              id = 'scopes',
+              size = 0.50,
+            },
+            {
+              id = 'breakpoints',
+              size = 0.20,
+            },
+            {
+              id = 'stacks',
+              size = 0.20,
+            },
+            {
+              id = 'watches',
+              size = 0.10,
+            },
+          },
+          position = 'left',
+          size = 40,
+        },
+        {
+          elements = { {
+            id = 'console',
+            size = 1,
+          } },
+          position = 'bottom',
+          size = 10,
+        },
+      },
+    }
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
     -- require('dap-go').setup {
