@@ -31,7 +31,8 @@ alias vi="nvim"
 alias vim="nvim"
 
 # FZF (fuzzy find)
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Deprecated [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(fzf --bash)"
 
 # Zoxide (smarter cd)
 eval "$(zoxide init --cmd cd bash)"
