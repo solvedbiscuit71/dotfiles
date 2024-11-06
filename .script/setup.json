@@ -1,4 +1,5 @@
 {
+	"~/dotfiles/kitty": "~/.config/kitty",
 	"~/dotfiles/nvim": "~/.config/nvim",
 	"~/dotfiles/alacritty": "~/.config/alacritty",
 	"~/dotfiles/bash/.bashrc": ["~/.bashrc", "~/.bash_profile"],
