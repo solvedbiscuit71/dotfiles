@@ -119,6 +119,14 @@ vim.opt.showmode = false
 --   vim.opt.clipboard = 'unnamedplus'
 -- end)
 
+-- Set indent width
+-- vim.opt.shiftwidth = 4
+-- vim.opt.tabstop = 4
+-- vim.opt.smartindent = true
+--
+-- Convert tab to spaces
+-- vim.opt.expandtab = true
+--
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -160,6 +168,7 @@ vim.opt.cursorcolumn = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+vim.opt.pumheight = 10
 
 -- Disable highlights
 vim.opt.hlsearch = false
@@ -631,6 +640,10 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
+        html = {},
+        emmet_ls = {},
+        cssls = {},
+        cssmodules_ls = {},
         ts_ls = {},
         --
 
@@ -959,9 +972,9 @@ require('lazy').setup({
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = { 'ruby', 'html' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = { 'ruby', 'html' } },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
