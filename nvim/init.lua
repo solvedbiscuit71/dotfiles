@@ -866,6 +866,39 @@ require('lazy').setup({
             auto_open = false,
           },
         },
+        formatting = {
+          fields = { 'abbr', 'menu', 'kind' },
+          format = function(entry, item)
+            -- Define menu shorthand for different completion sources.
+            local menu_icon = {
+              nvim_lsp = '♠',
+              luasnip = '♣',
+              path = '~',
+            }
+            -- Set the menu "icon" to the shorthand for each completion source.
+            item.menu = menu_icon[entry.source.name]
+
+            local content = item.abbr
+
+            -- Set the maximum width to 20% of the screen width or 20
+            local win_width = vim.api.nvim_win_get_width(0)
+            local max_content_width = math.max(math.floor(win_width * 0.2), 20)
+
+            -- Truncate the completion entry text if it's longer than the
+            -- max content width. We subtract 3 from the max content width
+            -- to account for the "..." that will be appended to it.
+            if #content > max_content_width then
+              item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. '...'
+            else
+              item.abbr = content .. (' '):rep(max_content_width - #content)
+            end
+            return item
+          end,
+          expandable_indicator = true,
+        },
+        experimental = {
+          ghost_text = true,
+        },
       }
     end,
   },
