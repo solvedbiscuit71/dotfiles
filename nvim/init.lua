@@ -800,6 +800,15 @@ require('lazy').setup({
           -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
+          -- Show documentation window
+          ['<C-g>'] = function()
+            if cmp.visible_docs() then
+              cmp.close_docs()
+            else
+              cmp.open_docs()
+            end
+          end,
+
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -851,6 +860,11 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+        },
+        view = {
+          docs = {
+            auto_open = false,
+          },
         },
       }
     end,
