@@ -126,7 +126,7 @@ vim.opt.showmode = false
 --
 -- Convert tab to spaces
 -- vim.opt.expandtab = true
---
+
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -188,6 +188,9 @@ vim.keymap.set('n', '<C-b>', '<C-^>')
 
 -- Use system clipboard
 vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y')
+
+-- Delete selection and put in insert mode
+vim.keymap.set('s', '<BS>', '<BS>i')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
