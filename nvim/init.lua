@@ -641,7 +641,6 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         html = {},
-        emmet_ls = {},
         cssls = {},
         cssmodules_ls = {},
         ts_ls = {},
