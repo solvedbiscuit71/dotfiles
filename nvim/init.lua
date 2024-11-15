@@ -774,6 +774,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
@@ -859,20 +860,18 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-        },
-        view = {
-          docs = {
-            auto_open = false,
-          },
+          -- Enable buffer after entering 3 character
+          { name = 'buffer', keyword_length = 3 },
         },
         formatting = {
           fields = { 'abbr', 'menu', 'kind' },
           format = function(entry, item)
             -- Define menu shorthand for different completion sources.
             local menu_icon = {
-              nvim_lsp = '♠',
-              luasnip = '♣',
-              path = '~',
+              nvim_lsp = '[L]',
+              luasnip = '[S]',
+              path = '[P]',
+              buffer = '[B]',
             }
             -- Set the menu "icon" to the shorthand for each completion source.
             item.menu = menu_icon[entry.source.name]
@@ -894,9 +893,6 @@ require('lazy').setup({
             return item
           end,
           expandable_indicator = true,
-        },
-        experimental = {
-          ghost_text = true,
         },
       }
     end,
@@ -920,15 +916,6 @@ require('lazy').setup({
       -- You can configure highlights by doing something like:
       -- vim.cmd.hi 'Comment gui=none'
     end,
-
-    -- Uncomment the below lines to enable transparent background
-    -- config = function()
-    --   require('tokyonight').setup {
-    --     transparent = true,
-    --     on_colors = function() end,
-    --     on_highlights = function() end,
-    --   }
-    -- end,
   },
 
   -- Highlight todo, notes, etc in comments
