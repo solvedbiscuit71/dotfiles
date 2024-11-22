@@ -120,10 +120,10 @@ vim.opt.showmode = false
 -- end)
 
 -- Set indent width
--- vim.opt.shiftwidth = 4
--- vim.opt.tabstop = 4
--- vim.opt.smartindent = true
---
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.smartindent = true
+
 -- Convert tab to spaces
 -- vim.opt.expandtab = true
 
