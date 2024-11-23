@@ -30,21 +30,20 @@ return {
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
       { '<leader>ds', dap.continue, desc = '[D]ebug [S]tart/Continue' },
-      { ']n', dap.step_over, desc = 'Debug: Step Over' },
-      { ']i', dap.step_into, desc = 'Debug: Step Into' },
-      { '[i', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>bb', dap.toggle_breakpoint, desc = 'Set [B]reakpoint' },
+      { '<leader>dn', dap.step_over, desc = 'Debug: Step Over' },
+      { '<leader>di', dap.step_into, desc = 'Debug: Step [I]nto' },
+      { '<leader>do', dap.step_out, desc = 'Debug: Step [O]ut' },
+      { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: Set [B]reakpoint' },
       {
-        '<leader>bc',
+        '<leader>dc',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
-        desc = 'Set [B]reakpoint with [C]ondition',
+        desc = 'Debug: Set Breakpoint with [C]ondition',
       },
-      -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<leader>do', dapui.open, desc = '[D]ebug [O]pen' },
-      { '<leader>dc', dapui.close, desc = '[D]ebug [C]lose UI' },
-      { '<C-k>', dapui.eval, desc = 'Evaluate expression under cursor' },
+      -- Toggle to see last session result.
+      { '<leader>dt', dapui.toggle, desc = 'Debug: [T]oggle UI' },
+      { '<leader>de', dapui.eval, desc = 'Debug: [E]valuate expression under cursor' },
       unpack(keys),
     }
   end,
@@ -81,36 +80,51 @@ return {
           elements = {
             {
               id = 'scopes',
-              size = 0.50,
-            },
-            {
-              id = 'breakpoints',
-              size = 0.20,
-            },
-            {
-              id = 'stacks',
-              size = 0.20,
+              size = 0.6,
             },
             {
               id = 'watches',
-              size = 0.10,
+              size = 0.4,
             },
           },
           position = 'left',
-          size = 40,
+          size = 30,
         },
         {
-          elements = { {
-            id = 'console',
-            size = 1,
-          } },
+          elements = {
+            {
+              id = 'stacks',
+              size = 0.6,
+            },
+            {
+              id = 'breakpoints',
+              size = 0.4,
+            },
+          },
+          position = 'right',
+          size = 30,
+        },
+        {
+          elements = {
+            {
+              id = 'repl',
+              size = 0.5,
+            },
+            {
+              id = 'console',
+              size = 0.5
+            },
+          },
           position = 'bottom',
-          size = 10,
+          size = 10
         },
       },
     }
 
+    -- Open the UI, after starting the debug session
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+
+    -- Also see,
     -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
