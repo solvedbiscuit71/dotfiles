@@ -958,7 +958,11 @@ require('lazy').setup({
       end
 
       -- Simple and Better File Explorer
-      require('mini.files').setup()
+      require('mini.files').setup {
+        content = {
+          prefix = function() end,
+        },
+      }
 
       vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = 'Open Mi[n]iFiles' })
 
