@@ -15,9 +15,8 @@ fi
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 # User defined env
-export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
+export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\W\[\e[m\]\\$ "
 export VISUAL=nvim
-PROMPT_COMMAND="export PROMPT_COMMAND=echo"
 HISTCONTROL=ignorespace
 HISTFILESIZE=10000
 HISTSIZE=2000
@@ -27,11 +26,9 @@ stty -ixon
 # User defined alias
 alias lg="lazygit"
 alias ls="ls -AFG"
-alias nn="nnn -CH -e"
 alias nnn="nnn -CH -e"
 alias vi="nvim"
 alias vim="nvim"
-alias clear="unset PROMPT_COMMAND; clear; PROMPT_COMMAND='export PROMPT_COMMAND=echo'"
 
 # FZF (fuzzy find)
 # Deprecated [ -f ~/.fzf.bash ] && source ~/.fzf.bash
