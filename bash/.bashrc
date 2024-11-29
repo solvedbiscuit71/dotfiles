@@ -49,13 +49,14 @@ export NVM_DIR="$HOME/.nvm"
 
 # Java
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
+export PATH="/opt/homebrew/opt/openjdk/bin:${PATH}"
 
 # Go
 export GOPATH="$HOME/.go"
-PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
+export PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
 # Rust
 . "$HOME/.cargo/env"
 
-export PATH
+# Haskell: ghcup-env
+[ -f "/Users/solvedbiscuit71/.ghcup/env" ] && . "/Users/solvedbiscuit71/.ghcup/env"
