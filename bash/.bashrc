@@ -15,12 +15,13 @@ fi
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 # User defined env
-export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\W\[\e[m\]\\$ "
+export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
 export VISUAL=nvim
 HISTCONTROL=ignorespace
 HISTFILESIZE=10000
 HISTSIZE=2000
 HISTTIMEFORMAT="%F %T "
+PROMPT_COMMAND="echo"
 stty -ixon
 
 # User defined alias
@@ -60,3 +61,6 @@ export PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
 # Haskell: ghcup-env
 [ -f "/Users/solvedbiscuit71/.ghcup/env" ] && . "/Users/solvedbiscuit71/.ghcup/env"
+
+# Done.
+echo "loaded ~/.bashrc"
