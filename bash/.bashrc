@@ -1,35 +1,14 @@
-# Linuxbrew
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# [[ -r "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh" ]] && . "/home/linuxbrew/.linuxbrew/etc/profile.d/bash_completion.sh"
+# Tmux (terminal multiplexer)
+if [[ "$ALACRITTY_WINDOW_ID" ]] && [[ -z "$TMUX" ]]; then
+    /opt/homebrew/bin/tmux new-session -A -s main
+    exit
+fi
 
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Tmux (terminal multiplexer)
-if [[ "$ALACRITTY_WINDOW_ID" ]] && [[ -z "$TMUX" ]]; then
-    tmux new-session -A -s main
-    exit
-fi
-
 # Bash Completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
-# User defined env
-export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
-export VISUAL=nvim
-HISTCONTROL=ignorespace
-HISTFILESIZE=10000
-HISTSIZE=2000
-HISTTIMEFORMAT="%F %T "
-PROMPT_COMMAND="echo"
-stty -ixon
-
-# User defined alias
-alias lg="lazygit"
-alias ls="ls -AFG"
-alias nnn="nnn -CH -e"
-alias vi="nvim"
-alias vim="nvim"
 
 # FZF (fuzzy find)
 # Deprecated [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -61,6 +40,23 @@ export PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
 # Haskell: ghcup-env
 [ -f "/Users/solvedbiscuit71/.ghcup/env" ] && . "/Users/solvedbiscuit71/.ghcup/env"
+
+# Environment Variables
+export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
+export VISUAL=nvim
+HISTCONTROL=ignorespace
+HISTFILESIZE=10000
+HISTSIZE=2000
+HISTTIMEFORMAT="%F %T "
+PROMPT_COMMAND="echo"
+stty -ixon
+
+# Aliases
+alias lg="lazygit"
+alias ls="lsd -A"
+alias nnn="nnn -CH -e"
+alias vi="nvim"
+alias vim="nvim"
 
 # Done.
 echo "loaded ~/.bashrc"
