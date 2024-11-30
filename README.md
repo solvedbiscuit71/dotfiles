@@ -1,14 +1,16 @@
 # Prerequisites
 
-```sh
+Install Xcode and Homebrew.
+
+```bash
 xcode-select --install
 ```
 
-2. Homebrew
-```sh
+```bash
 /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-## Add brew to $PATH
+
+Add brew to $PATH.
 
 ```sh
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -16,34 +18,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Installation
 
-```sh
-brew install bash bash-completion fzf gcc git lazygit neovim nnn tmux zoxide
-```
-
-## Nerd Font
-
-This repo uses [ZedMono Nerd Font](https://www.nerdfonts.com/#home) for terminal emulator.
-
-## Bash
+Download all the necessary packages via homebrew.
 
 ```sh
-echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
-chsh -s /opt/homebrew/bin/bash
+brew install bash bash-completion fzf gcc git lazygit lsd neovim nnn tmux zoxide
 ```
 
-## Alacritty
+Download [IosevkaTermSlab](https://www.nerdfonts.com/font-downloads) Nerd Font and Install it.
+
+Alacritty is a simple and fast terminal emulator written in rust. Install alacritty via homebrew cask.
 
 ```sh
 brew install --cask alacritty
 ```
-
-## TPM
-
-```sh
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-Once installed, enter tmux and enter the following sequence `PREFIX I` to install the plugin
 
 # Setup
 
@@ -52,57 +39,59 @@ git clone https://github.com/solvedbiscuit71/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
-## Install
+To install the dotfiles
+
 ```sh
 python3 .script/init.py
 ```
 
-## Uninstall
+To remove the dotfiles
 ```sh
 python3 .script/deinit.py
 ```
 
-# Postrequisites
+# Config
 
-## Disable dock delay
+Set bash as your default shell
 
-```sh
+```bash
+echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
+chsh -s /opt/homebrew/bin/bash
+```
+
+Install plugin manager for tmux. Enter tmux and install the plugins via `<C-a>I`
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+# Add-ons
+
+Disable dock delay in MacOS
+
+```bash
 defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
 ```
 
-## Tiling window manager
+Tiling window manager for MacOS
 
-```sh
+```bash
 brew install --cask amethyst spaceid
 ```
 
-## Karabiner-Elements
-
-```sh
-brew install --cask karabiner-elements
-```
-
-## Programming Language
-
-### Python
-
-Using pyenv to manage different python version, and using poetry for managing virtual environments and packages.
-```sh
+Using `pyenv` to manage different python version
+```bash
 brew update
 brew install pyenv
 ```
 
-Current LTS python version is 3.11 so install python3.11 using pyenv and make it default
-```sh
+```bash
 pyenv install 3.11
 pyenv global 3.11
 ```
 
-### Node
+Using `nvm` to manage different node version, follow the [nvm](https://github.com/nvm-sh/nvm) github page to install nvm.
 
-Using nvm to manage different node version, follow the [nvm](https://github.com/nvm-sh/nvm) github to install nvm.
-
-To set a default node version
-```sh
+```bash
 nvm alias default <version>
 ```
