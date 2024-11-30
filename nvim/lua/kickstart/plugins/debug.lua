@@ -29,17 +29,17 @@ return {
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<leader>ds', dap.continue, desc = '[D]ebug [S]tart/Continue' },
-      { '<leader>dn', dap.step_over, desc = 'Debug: Step Over' },
-      { '<leader>di', dap.step_into, desc = 'Debug: Step [I]nto' },
-      { '<leader>do', dap.step_out, desc = 'Debug: Step [O]ut' },
-      { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: Set [B]reakpoint' },
+      { '<leader>d.', dap.continue, desc = 'Debug: Current File' },
+      { '<leader>dn', dap.step_over, desc = 'Debug: Step to [N]ext Line' },
+      { '<leader>di', dap.step_into, desc = 'Debug: Step [I]nto function' },
+      { '<leader>do', dap.step_out, desc = 'Debug: Step [O]ut of function' },
+      { '<leader>bt', dap.toggle_breakpoint, desc = 'Debug: [T]oggle [B]reakpoint' },
       {
-        '<leader>dc',
+        '<leader>bc',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
-        desc = 'Debug: Set Breakpoint with [C]ondition',
+        desc = 'Debug: Set [B]reakpoint with [C]ondition',
       },
       -- Toggle to see last session result.
       { '<leader>dt', dapui.toggle, desc = 'Debug: [T]oggle UI' },
