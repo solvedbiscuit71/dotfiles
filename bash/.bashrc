@@ -4,6 +4,23 @@ if [[ "$ALACRITTY_WINDOW_ID" ]] && [[ -z "$TMUX" ]]; then
     exit
 fi
 
+# Environment Variables
+export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
+export VISUAL=nvim
+HISTCONTROL=ignorespace
+HISTFILESIZE=10000
+HISTSIZE=2000
+HISTTIMEFORMAT="%F %T "
+PROMPT_COMMAND="echo"
+stty -ixon
+
+# Aliases
+alias lg="lazygit"
+alias ls="ls -AF --color"
+alias nnn="nnn -CH -e"
+alias vi="nvim"
+alias vim="nvim"
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -40,23 +57,6 @@ export PATH="/usr/local/go/bin:$GOPATH/bin:${PATH}"
 
 # Haskell: ghcup-env
 [ -f "/Users/solvedbiscuit71/.ghcup/env" ] && . "/Users/solvedbiscuit71/.ghcup/env"
-
-# Environment Variables
-export PS1="\[\e[01;32m\]\u@\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]\$(__git_ps1)\n$ "
-export VISUAL=nvim
-HISTCONTROL=ignorespace
-HISTFILESIZE=10000
-HISTSIZE=2000
-HISTTIMEFORMAT="%F %T "
-PROMPT_COMMAND="echo"
-stty -ixon
-
-# Aliases
-alias lg="lazygit"
-alias ls="lsd -A"
-alias nnn="nnn -CH -e"
-alias vi="nvim"
-alias vim="nvim"
 
 # Done.
 echo "loaded ~/.bashrc"

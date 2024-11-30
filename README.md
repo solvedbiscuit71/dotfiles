@@ -24,7 +24,7 @@ Download all the necessary packages via homebrew.
 brew install bash bash-completion fzf gcc git lazygit lsd neovim nnn tmux zoxide
 ```
 
-Download [IosevkaTermSlab](https://www.nerdfonts.com/font-downloads) Nerd Font and Install it.
+Download [Iosevka](https://typeof.net/Iosevka/) Nerd Font and Install it.
 
 Alacritty is a simple and fast terminal emulator written in rust. Install alacritty via homebrew cask.
 

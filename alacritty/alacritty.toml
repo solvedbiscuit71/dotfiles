@@ -36,19 +36,19 @@ builtin_box_drawing = true
 size = 22
 
 [font.bold]
-family = "IosevkaTermSlab Nerd Font"
+family = "Iosevka Curly"
 style = "Bold"
 
 [font.bold_italic]
-family = "IosevkaTermSlab Nerd Font"
+family = "Iosevka Curly"
 style = "Bold Italic"
 
 [font.italic]
-family = "IosevkaTermSlab Nerd Font"
+family = "Iosevka Curly"
 style = "Italic"
 
 [font.normal]
-family = "IosevkaTermSlab Nerd Font"
+family = "Iosevka Curly"
 style = "Regular"
 
 [mouse]
