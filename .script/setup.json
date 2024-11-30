@@ -2,6 +2,7 @@
 	"~/dotfiles/kitty": "~/.config/kitty",
 	"~/dotfiles/nvim": "~/.config/nvim",
 	"~/dotfiles/alacritty": "~/.config/alacritty",
+	"~/dotfiles/lsd": "~/.config/lsd",
 	"~/dotfiles/bash/.bashrc": ["~/.bashrc", "~/.bash_profile"],
 	"~/dotfiles/bash/.inputrc": "~/.inputrc",
 	"~/dotfiles/tmux/.tmux.conf": "~/.tmux.conf"
