@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # aliases
 alias lg="lazygit"
 alias ls="ls -AF --color"

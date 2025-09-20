@@ -3,11 +3,11 @@
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = [
-    # JankyBorders has a built-in detection of already running process,
-    # so it won't be run twice on AeroSpace restart
-    # 'exec-and-forget borders'
-]
+# after-startup-command = [
+#     JankyBorders has a built-in detection of already running process,
+#     so it won't be run twice on AeroSpace restart
+#     'exec-and-forget borders'
+# ]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -39,7 +39,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
-automatically-unhide-macos-hidden-apps = false
+automatically-unhide-macos-hidden-apps = true
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -116,38 +116,29 @@ automatically-unhide-macos-hidden-apps = false
     alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+    alt-0 = 'workspace 0'
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+    alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
     alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
     alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
     alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
     alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-    alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
-    alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
-    alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
-    alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
-    alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
-    # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    alt-semicolon = 'mode service'
+    alt-s = 'mode service'
+    alt-m = 'mode monitor'
 
 	# Disable annoying and useless "hide application" shortcut
 	cmd-h = []
-    cmd-alt-h = []
+	cmd-alt-h = []
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -155,19 +146,42 @@ automatically-unhide-macos-hidden-apps = false
     backtick = ['reload-config', 'mode main']
     esc = 'mode main'
     enter = 'mode main'
-    r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-    z = ['fullscreen', 'mode main'] # Toggle fullscreen
+
+	# See: https://nikitabobko.github.io/AeroSpace/commands#close-all-windows-but-current
     backspace = ['close-all-windows-but-current', 'mode main']
 
-    # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-    #s = ['layout sticky tiling', 'mode main']
+	# See: https://nikitabobko.github.io/AeroSpace/commands#flatten-workspace-tree
+    r = ['flatten-workspace-tree', 'mode main']
 
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+	# See: https://nikitabobko.github.io/AeroSpace/commands#layout
+    f = ['layout floating tiling', 'mode main']
 
-    down = 'volume down'
-    up = 'volume up'
-    shift-down = ['volume set 0', 'mode main']
+	# See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
+    z = ['fullscreen', 'mode main']
+
+	# See: https://nikitabobko.github.io/AeroSpace/commands#join-with
+    alt-h = ['join-with left', 'mode main']
+    alt-j = ['join-with down', 'mode main']
+    alt-k = ['join-with up', 'mode main']
+    alt-l = ['join-with right', 'mode main']
+
+# 'monitor' binding mode declaration.
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+[mode.monitor.binding]
+	# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-monitor
+	alt-shift-h = ['move-workspace-to-monitor left', 'mode main']
+	alt-shift-j = ['move-workspace-to-monitor down', 'mode main']
+	alt-shift-k = ['move-workspace-to-monitor up', 'mode main']
+	alt-shift-l = ['move-workspace-to-monitor right', 'mode main']
+
+# Assign workspaces to monitors
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+	# main display
+	1 = 'main'
+	2 = 'main'
+	3 = 'main'
+	4 = 'main'
+
+	# secondary display (extended)
+	0 = 'secondary'
