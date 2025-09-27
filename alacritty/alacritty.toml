@@ -9,6 +9,6 @@ builtin_box_drawing = true
 size = 14
 
 [window]
-decorations	= "None"
+decorations	= "Buttonless"
 dynamic_title = true
 padding = { x = 8, y = 4 }

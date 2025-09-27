@@ -1,0 +1,8 @@
+[user]
+	name = Praveen Perumal
+	email = ppraveen98841@gmail.com
+	signingkey = /Users/biscuit/.ssh/github/id_ed25519_github.pub
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

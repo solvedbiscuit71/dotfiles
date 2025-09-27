@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+unlink $HOME/.aerospace.toml
+unlink $HOME/.tmux.conf
+unlink $HOME/.zshrc
+unlink $HOME/.gitconfig
+unlink $HOME/.config/alacritty/alacritty.toml
+unlink $HOME/.config/nvim/init.lua
+
+rmdir $HOME/.config/alacritty
+rmdir $HOME/.config/nvim

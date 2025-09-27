@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+mkdir $HOME/.config/alacritty
+mkdir $HOME/.config/nvim
+
+ln -s $PWD/aerospace/.aerospace.toml $HOME/.aerospace.toml
+ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
+ln -s $PWD/zsh/.zshrc $HOME/.zshrc
+ln -s $PWD/git/.gitconfig $HOME/.gitconfig
+ln -s $PWD/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+ln -s $PWD/nvim/init.lua $HOME/.config/nvim/init.lua

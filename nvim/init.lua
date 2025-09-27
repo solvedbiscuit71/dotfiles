@@ -96,6 +96,9 @@ if not vim.g.vscode then
 -- ################################################################################
 else
 	require("paq")({
+		-- Let Paq manage itself.
+		"savq/paq-nvim",
+
 		-- Mini.nvim: independent plugins
 		"echasnovski/mini.nvim",
 	})
