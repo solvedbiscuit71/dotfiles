@@ -2,13 +2,16 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # aliases
-alias ls='eza -a'
+alias ls='eza'
+alias la='eza -a'
+alias ll='eza -l'
 alias lg="lazygit"
-alias ll="nnn -CH -ed"
+alias nnn="nnn -CH -e"
 alias vi="nvim"
 alias vim="nvim"
 alias ve="python3 -m venv .venv"
 alias va="source .venv/bin/activate"
+alias ta="tmux attach -t"
 
 # variables
 export PROMPT="%F{green}%n@%m %F{blue}%1~ %F{white}%# "
