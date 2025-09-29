@@ -5,6 +5,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias ls='eza'
 alias la='eza -a'
 alias ll='eza -l'
+alias lt='tmux ls'
 alias lg="lazygit"
 alias nnn="nnn -CH -e"
 alias vi="nvim"
