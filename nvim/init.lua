@@ -6,6 +6,9 @@ if not vim.g.vscode then
 		-- Let Paq manage itself.
 		"savq/paq-nvim",
 
+		-- Gruvbox: Color Theme
+		"ellisonleao/gruvbox.nvim",
+
 		-- Telescope: Fuzzy Find
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
@@ -15,12 +18,29 @@ if not vim.g.vscode then
 
 		-- Mini.nvim: independent plugins
 		"echasnovski/mini.nvim",
+
+		-- Surround.nvim
+		"kylechui/nvim-surround",
+
+		-- Hop.nvim
+		"smoka7/hop.nvim",
+
+		-- Harpoon: Quick Find
+		{
+			"ThePrimeagen/harpoon",
+			branch = "harpoon2"
+		}
 	})
 	-- telescope
 	local telescope = require("telescope")
 	telescope.setup()
 
-	vim.cmd.colorscheme "retrobox"
+	-- colorscheme
+	local gruvbox = require("gruvbox")
+	gruvbox.setup({
+		transparent_mode = true
+	})
+	vim.cmd("colorscheme gruvbox")
 
 	-- statusline
 	local statusline = require("mini.statusline")
@@ -40,7 +60,6 @@ if not vim.g.vscode then
 	})
 
 	-- mini.nvim
-	require("mini.icons").setup()
 	require("mini.snippets").setup()
 	require("mini.completion").setup({
 		window = {
@@ -61,10 +80,21 @@ if not vim.g.vscode then
 	})
 	require("mini.comment").setup()
 	require("mini.pairs").setup()
-	require("mini.jump").setup()
-	require("mini.jump2d").setup()
 	require("mini.operators").setup()
-	require("mini.surround").setup()
+
+	-- surround
+	require("nvim-surround").setup()
+
+	-- hop
+	local hop = require("hop")
+	hop.setup({
+		case_insensitive = false,
+		multi_windows = true,
+	})
+
+	-- harpoon
+	local harpoon = require("harpoon")
+	harpoon:setup()
 
 	-- options
 	vim.opt.tabstop = 4
@@ -87,9 +117,24 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
 	vim.keymap.set("n", "<leader>n", MiniFiles.open)
 	vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>")
+	vim.keymap.set("n", "<leader>h", function()
+		require('telescope.builtin').find_files({ no_ignore = true, hidden = true })
+	end)
+	vim.keymap.set("n", "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 	vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep<cr>")
 	vim.keymap.set("n", "<C-b>", "<C-^>", { silent = true })
 	vim.keymap.set("i", "<C-y>", "v:lua.ctrl_y_action()", { expr = true })
+
+	-- hop
+	vim.keymap.set("n", "go", hop.hint_char1)
+
+	-- harpoon
+	vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+	vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+	vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+	vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+	vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+	vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
 -- ################################################################################
 -- VSCode Neovim Configuration
