@@ -15,7 +15,7 @@ alias va="source .venv/bin/activate"
 alias ta="tmux attach -t"
 
 # variables
-export PROMPT="%F{green}%n@%m %F{blue}%1~ %F{white}%# "
+export PROMPT="%F{green}%n%F{white}@%F{green}%m %F{blue}%2~ %F{white}%# "
 export EDITOR="nvim"
 export VISUAL="nvim"
 
