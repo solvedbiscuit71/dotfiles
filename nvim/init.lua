@@ -118,8 +118,10 @@ if not vim.g.vscode then
 	vim.g.mapleader = " "
 	vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
 	vim.keymap.set("n", "<leader>n", MiniFiles.open)
-	vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>")
-	vim.keymap.set("n", "<leader>h", function()
+	vim.keymap.set("n", "<leader>f", function()
+		require('telescope.builtin').find_files({ no_ignore = false, hidden = true })
+	end)
+	vim.keymap.set("n", "<leader>a", function()
 		require('telescope.builtin').find_files({ no_ignore = true, hidden = true })
 	end)
 	vim.keymap.set("n", "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
@@ -131,8 +133,8 @@ if not vim.g.vscode then
 	vim.keymap.set("n", "go", hop.hint_char1)
 
 	-- harpoon
-	vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-	vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+	vim.keymap.set("n", "<C-e>", function() harpoon:list():add() end)
+	vim.keymap.set("n", "<C-q>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 	vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
 	vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
 	vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
@@ -148,15 +150,26 @@ else
 
 		-- Mini.nvim: independent plugins
 		"echasnovski/mini.nvim",
+
+		-- Surround.nvim
+		"kylechui/nvim-surround",
+
+		-- Hop.nvim
+		"smoka7/hop.nvim",
 	})
-
 	-- mini.nvim
-	require("mini.jump").setup()
-	require("mini.jump2d").setup()
+	require("mini.comment").setup()
+	require("mini.pairs").setup()
 	require("mini.operators").setup()
-	require("mini.surround").setup()
 
-	-- highlight
-    vim.api.nvim_set_hl(0, 'MiniJump', { underline = true })
-    vim.api.nvim_set_hl(0, 'MiniJump2dSpot', { underline = true, standout = true })
+	-- surround
+	require("nvim-surround").setup()
+
+	-- hop
+	local hop = require("hop")
+	hop.setup()
+
+	vim.g.mapleader = " "
+	vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
+	vim.keymap.set("n", "go", hop.hint_char1)
 end
