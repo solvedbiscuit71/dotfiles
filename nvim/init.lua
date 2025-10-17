@@ -103,6 +103,8 @@ if not vim.g.vscode then
 	vim.opt.relativenumber = true
 	vim.opt.smartindent = true
 	vim.opt.pumheight = 15
+	vim.opt.cursorline = true
+	vim.opt.cursorcolumn = true
 
 	-- keybindings
 	_G.ctrl_y_action = function()
