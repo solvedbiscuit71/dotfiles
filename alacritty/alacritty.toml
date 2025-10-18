@@ -29,6 +29,11 @@ white   = '#d4be98'
 [env]
 TERM = "xterm-256color"
 
+[terminal.shell]
+program = "/opt/homebrew/bin/tmux"
+args = ["new-session", "-A", "-s", "home"]
+
+
 [font]
 normal = { family = "ZedMono Nerd Font" }
 builtin_box_drawing = true
