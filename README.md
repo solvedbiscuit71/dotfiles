@@ -1,4 +1,4 @@
-# dotfiles
+# Installation
 
 Install Xcode
 
@@ -13,13 +13,13 @@ Install Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-Install Packages
-
-```sh
-brew install fd fzf gcc git lazygit neovim nnn pyenv ripgrep zoxide zsh-completions zsh-syntax-highlighting
-```
-
 Install Softwares
 
-1. [Aerospace](https://nikitabobko.github.io/AeroSpace/guide)
-2. [Alacritty](https://alacritty.org/index.html)
+1. [Alacritty](https://alacritty.org/index.html)
+2. [Dropshelf](https://pilotmoon.com/dropshelf/)
+
+# Scripts
+
+1. install-packages: uses brew and git to install necessary packages and software.
+2. install-config: creates folder and symlinks to configuration files.
+3. remove-config: remove folder and unlink symlinks to configuration files.

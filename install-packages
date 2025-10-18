@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+echo "Install brew packages"
+brew install fd fzf gcc git lazygit neovim nnn pyenv ripgrep zoxide zsh-completions zsh-syntax-highlighting
+
+echo "Install zsh plugins"
+mkdir $HOME/zplugins; cd $HOME/zplugins
+git clone https://github.com/Aloxaf/fzf-tab; cd -
+
+echo "Install brew casks"
+brew install --cask aerospace raycast vscodium
+
+echo "Install font family"
+brew install --cask font-zed-mono-nerd-font
