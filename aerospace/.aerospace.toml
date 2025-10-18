@@ -6,7 +6,7 @@
 after-startup-command = [
     # JankyBorders has a built-in detection of already running process,
     # so it won't be run twice on AeroSpace restart
-	'exec-and-forget borders active_color=0xff90a959 inactive_color=0x00000000 width=5.0 blacklist="Dropshelf,Raycast,iPhone Mirroring"'
+	# 'exec-and-forget borders active_color=0xff90a959 inactive_color=0x00000000 width=2.0 whitelist="Alacritty"'
 ]
 
 # Start AeroSpace at login
@@ -128,7 +128,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    alt-tab = 'focus-back-and-forth'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-s = 'mode service'
@@ -148,15 +148,12 @@ automatically-unhide-macos-hidden-apps = true
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-    backtick = ['reload-config', 'mode main']
+    r = ['reload-config', 'mode main']
     esc = 'mode main'
     enter = 'mode main'
 
-	# See: https://nikitabobko.github.io/AeroSpace/commands#close-all-windows-but-current
-    backspace = ['close-all-windows-but-current', 'mode main']
-
 	# See: https://nikitabobko.github.io/AeroSpace/commands#flatten-workspace-tree
-    r = ['flatten-workspace-tree', 'mode main']
+    backspace = ['flatten-workspace-tree', 'mode main']
 
 	# See: https://nikitabobko.github.io/AeroSpace/commands#layout
     f = ['layout floating tiling', 'mode main']
@@ -182,7 +179,7 @@ automatically-unhide-macos-hidden-apps = true
 # Assign workspaces to monitors
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-	1 = 'secondary'
+	1 = 'main'
 	2 = 'main'
 	3 = 'main'
-	4 = 'main'
+	4 = 'secondary'
