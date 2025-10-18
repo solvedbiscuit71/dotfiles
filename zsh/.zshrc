@@ -66,14 +66,6 @@ cursor_mode() {
 
 cursor_mode
 
-# zsh completions
-if type brew &>/dev/null; then
-	FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-	autoload -Uz compinit
-	compinit
-fi
-
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_DIR=$(brew --prefix)/share/zsh-syntax-highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$ZSH_HIGHLIGHT_DIR/highlighters
@@ -82,6 +74,15 @@ source $ZSH_HIGHLIGHT_DIR/zsh-syntax-highlighting.zsh
 # fuzzy search
 export FZF_DEFAULT_COMMAND="fd --type f"
 source <(fzf --zsh)
+
+# zsh completions
+if type brew &>/dev/null; then
+	FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+	autoload -Uz compinit
+	compinit
+	source ~/zplugins/fzf-tab/fzf-tab.plugin.zsh
+fi
 
 # better `cd`
 eval "$(zoxide init --cmd cd zsh)"
