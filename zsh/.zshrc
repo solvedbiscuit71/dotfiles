@@ -92,10 +92,13 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
+# go
+export PATH="$HOME/go/bin:$PATH"
+
 # bison
-export LDFLAGS="-L/opt/homebrew/opt/bison/lib"
-export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/bison/lib"
+# export PATH="/opt/homebrew/opt/bison/bin:$PATH"
 
 # sumo
-export SUMO_HOME="/System/Volumes/Data/Library/Frameworks/EclipseSUMO.framework/Versions/1.24.0/EclipseSUMO/share/sumo/"
-export PATH="$SUMO_HOME/bin:$PATH"
+# export SUMO_HOME="/System/Volumes/Data/Library/Frameworks/EclipseSUMO.framework/Versions/1.24.0/EclipseSUMO/share/sumo/"
+# export PATH="$SUMO_HOME/bin:$PATH"
