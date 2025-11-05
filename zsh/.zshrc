@@ -27,6 +27,10 @@ setopt HIST_SAVE_NO_DUPS
 bindkey -v
 export KEYTIMEOUT=1
 
+# bind ^P/^N to search back/forward in command history
+bindkey -M viins '^P' history-beginning-search-backward
+bindkey -M viins '^N' history-beginning-search-forward
+
 autoload -Uz select-bracketed select-quoted
 zle -N select-quoted
 zle -N select-bracketed
