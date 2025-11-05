@@ -1,175 +1,199 @@
--- ################################################################################
--- Neovim Configuration
--- ################################################################################
-if not vim.g.vscode then
-	require("paq")({
-		-- Let Paq manage itself.
-		"savq/paq-nvim",
+-- Install mini.nvim
+local path_package = vim.fn.stdpath('data') .. '/site'
+local mini_path = path_package .. '/pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+	vim.cmd('echo "Installing `mini.nvim`" | redraw')
+	local clone_cmd = {
+		'git', 'clone', '--filter=blob:none',
+		'--branch', 'stable',
+		'https://github.com/nvim-mini/mini.nvim', mini_path
+	}
+	vim.fn.system(clone_cmd)
+	vim.cmd('packadd mini.nvim | helptags ALL')
+	vim.cmd('echo "Installed `mini.nvim`" | redraw')
+end
 
-		-- Gruvbox: Color Theme
-		"ellisonleao/gruvbox.nvim",
+-- Install lspconfig
+local lspconfig_path = vim.fn.stdpath('config') .. '/pack/nvim/start/nvim-lspconfig'
+if not vim.loop.fs_stat(lspconfig_path) then
+	vim.cmd('echo "Installing `lspconfig`" | redraw')
+	local clone_cmd = {
+		'git', 'clone',
+		'https://github.com/neovim/nvim-lspconfig', lspconfig_path
+	}
+	vim.fn.system(clone_cmd)
+	vim.cmd('echo "Installed `lspconfig`" | redraw')
+end
 
-		-- Telescope: Fuzzy Find
-		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
+-- Set options
+vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
+vim.opt.cursorcolumn = true
+vim.opt.cursorline = true
+vim.opt.number = true
+vim.opt.pumheight = 15
+vim.opt.relativenumber = true
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.g.mapleader = ' '
+vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
 
-		-- Treesitter: Highlight
-		"nvim-treesitter/nvim-treesitter",
+-- Setup mini.deps
+require('mini.deps').setup({
+	path = {
+		package = path_package
+	}
+})
+MiniDeps.add({ name = 'mini.nvim', checkout = 'stable' })
 
-		-- Mini.nvim: independent plugins
-		"echasnovski/mini.nvim",
+-- Add plugins
+local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-		-- Surround.nvim
-		"kylechui/nvim-surround",
+later(function()
+	require('mini.comment').setup()
+	require('mini.pairs').setup()
+	require('mini.operators').setup()
 
-		-- Hop.nvim
-		"smoka7/hop.nvim",
+	-- To make mini.surround behavior like tpope/vim-surround
+    require('mini.surround').setup({
+      mappings = {
+        add = 'ys',
+        delete = 'ds',
+        find = '',
+        find_left = '',
+        highlight = '',
+        replace = 'cs',
+        update_n_lines = '',
+        suffix_last = '',
+        suffix_next = '',
+      },
+      search_method = 'cover_or_next',
+    })
+	vim.keymap.del('x', 'ys')
+	vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+	vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+end)
 
-		-- Harpoon: Quick Find
-		{
-			"ThePrimeagen/harpoon",
-			branch = "harpoon2"
-		}
-	})
-	-- telescope
-	local telescope = require("telescope")
-	telescope.setup()
-
-	-- colorscheme
-	local gruvbox = require("gruvbox")
-	gruvbox.setup({
-		transparent_mode = true
-	})
-	vim.cmd("colorscheme gruvbox")
-
-	-- statusline
-	local statusline = require("mini.statusline")
-	statusline.setup({ use_icons = false })
-
-	-- treesitter
-	local treesitter = require("nvim-treesitter.configs")
-	treesitter.setup({
-		auto_install = true,
-		ignore_install = {
-			"tmux",
-		},
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		}
-	})
-
-	-- mini.nvim
-	require("mini.snippets").setup()
-	require("mini.completion").setup({
-		window = {
-			info = { border = "single" },
-			signature = { border = "single" },
-		},
-		lsp_completion = {
-			source_func = "omnifunc"
-		}
-	})
-	require("mini.files").setup({
-		-- use_icons = false
-		content = { prefix = function() end, },
-		windows = {
-			max_number = 3,
-		},
-
-	})
-	require("mini.comment").setup()
-	require("mini.pairs").setup()
-	require("mini.operators").setup()
-
-	-- surround
-	require("nvim-surround").setup()
-
-	-- hop
-	local hop = require("hop")
+later(function()
+	add({ source = 'smoka7/hop.nvim' })
+	local hop = require('hop')
 	hop.setup({
 		case_insensitive = false,
 		multi_windows = true,
 	})
+	vim.keymap.set('n', 'go', hop.hint_char1)
+end)
 
-	-- harpoon
-	local harpoon = require("harpoon")
-	harpoon:setup()
+if not vim.g.vscode then
+	now(function()
+		add({ source = 'ellisonleao/gruvbox.nvim' })
 
-	-- options
-	vim.opt.tabstop = 4
-	vim.opt.shiftwidth = 4
-	vim.opt.number = true
-	vim.opt.relativenumber = true
-	vim.opt.smartindent = true
-	vim.opt.pumheight = 15
-	vim.opt.cursorline = true
-	vim.opt.cursorcolumn = true
+		local gruvbox = require('gruvbox')
+		gruvbox.setup({
+			transparent_mode = true
+		})
+		vim.o.termguicolors = true
+		vim.cmd('colorscheme gruvbox')
+	end)
 
-	-- keybindings
-	_G.ctrl_y_action = function()
-		if vim.fn.pumvisible() == 1 and vim.fn.complete_info().selected == -1 then
-			return "<C-n><C-y>"
-		else
-			return "<C-y>"
+	now(function()
+		require('mini.tabline').setup({
+			use_icons = false
+		})
+		require('mini.statusline').setup({
+			use_icons = false
+		})
+	end)
+
+	later(function()
+		add({
+			source = 'nvim-treesitter/nvim-treesitter',
+			checkout = 'master',
+			monitor = 'main',
+			hooks = { post_checkout = function()
+				vim.cmd('TSUpdate')
+			end },
+		})
+
+		local treesitter = require('nvim-treesitter.configs')
+		treesitter.setup({
+			auto_install = true,
+			ignore_install = {
+				'tmux',
+			},
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			}
+		})
+	end)
+
+	later(function()
+		require('mini.files').setup({
+			use_icons = false,
+			content = { prefix = function() end, },
+			windows = {
+				max_number = 3,
+			},
+		})
+		vim.keymap.set('n', '<leader>n', MiniFiles.open)
+	end)
+
+	later(function()
+		require('mini.pick').setup()
+		vim.keymap.set("n", "<leader>f", function()
+			MiniPick.builtin.cli({ 
+				command = {'fd', '-H' , '-t', 'file'}
+			})
+		end)
+		vim.keymap.set("n", "<leader>g", function()
+			MiniPick.builtin.grep({ tool = 'rg' })
+		end)
+	end)
+
+	later(function()
+		require('mini.snippets').setup()
+		require('mini.completion').setup({
+			delay = { completion = 200, info = 200, signature = 100 },
+			window = {
+				info = { height = 20, width = 80,  border = 'single' },
+				signature = { height = 20, width = 80, border = 'single' },
+			},
+		})
+		_G.ctrl_y_action = function()
+			if vim.fn.pumvisible() == 1 and vim.fn.complete_info().selected == -1 then
+				return '<C-n><C-y>'
+			else
+				return '<C-y>'
+			end
 		end
-	end
-
-	vim.g.mapleader = " "
-	vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
-	vim.keymap.set("n", "<leader>n", MiniFiles.open)
-	vim.keymap.set("n", "<leader>f", function()
-		require('telescope.builtin').find_files({ no_ignore = false, hidden = true })
+		vim.keymap.set('i', '<C-y>', 'v:lua.ctrl_y_action()', { expr = true })
 	end)
-	vim.keymap.set("n", "<leader>a", function()
-		require('telescope.builtin').find_files({ no_ignore = true, hidden = true })
+
+	-- Setup LSP
+	later(function()
+		-- disable vim.lsp.buf.signature_help() because mini.completion has auto_signature
+		vim.keymap.del('i', '<C-s>')
+		vim.keymap.set('n', 'K', function()
+			vim.lsp.buf.hover({
+				border = 'single',
+				title = ' Documentation ',
+				title_pos = 'left',
+			})
+		end)
+		vim.keymap.set('n', '<C-w>d', function()
+			vim.diagnostic.open_float({
+				scope = 'line',
+				border = 'single',
+			})
+		end)
+		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
+		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition)
+
+		-- Language Server (Uses lspconfig)
+		vim.lsp.enable('gopls')
 	end)
-	vim.keymap.set("n", "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
-	vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep<cr>")
-	vim.keymap.set("n", "<C-b>", "<C-^>", { silent = true })
-	vim.keymap.set("i", "<C-y>", "v:lua.ctrl_y_action()", { expr = true })
-
-	-- hop
-	vim.keymap.set("n", "go", hop.hint_char1)
-
-	-- harpoon
-	vim.keymap.set("n", "<C-e>", function() harpoon:list():add() end)
-	vim.keymap.set("n", "<C-q>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-	vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-	vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
-	vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
-	vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
-
--- ################################################################################
--- VSCode Neovim Configuration
--- ################################################################################
-else
-	require("paq")({
-		-- Let Paq manage itself.
-		"savq/paq-nvim",
-
-		-- Mini.nvim: independent plugins
-		"echasnovski/mini.nvim",
-
-		-- Surround.nvim
-		"kylechui/nvim-surround",
-
-		-- Hop.nvim
-		"smoka7/hop.nvim",
-	})
-	-- mini.nvim
-	require("mini.comment").setup()
-	require("mini.pairs").setup()
-	require("mini.operators").setup()
-
-	-- surround
-	require("nvim-surround").setup()
-
-	-- hop
-	local hop = require("hop")
-	hop.setup()
-
-	vim.g.mapleader = " "
-	vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
-	vim.keymap.set("n", "go", hop.hint_char1)
 end
