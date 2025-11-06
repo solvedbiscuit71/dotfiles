@@ -107,6 +107,14 @@ if not vim.g.vscode then
 	end)
 
 	later(function()
+		require('mini.bracketed').setup()
+		local indentscope = require('mini.indentscope')
+		indentscope.setup({
+			delay = 200,
+		})
+	end)
+
+	later(function()
 		add({
 			source = 'nvim-treesitter/nvim-treesitter',
 			checkout = 'master',
