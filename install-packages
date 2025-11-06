@@ -1,14 +1,40 @@
 #!/bin/zsh
 
-echo "Install brew packages"
-brew install fd fzf gcc git lazygit neovim nnn pyenv ripgrep zoxide zsh-completions zsh-syntax-highlighting
+install_package() {
+	local name="$1"
+	local cmd="$2"
 
-echo "Install zsh plugins"
-mkdir $HOME/zplugins; cd $HOME/zplugins
-git clone https://github.com/Aloxaf/fzf-tab; cd -
+	if read -q "choice?Install '$name' (Press 'y' to continue): "; then
+		echo
+		eval "$cmd"
+		local exit_code=$?
+		if [ "$exit_code" -ne 0 ]; then
+			echo "Failed to install '$name'"
+		fi
+		return $exit_code
+	else
+		echo
+		echo "Skipped"
+		return 0
+	fi
+}
 
-echo "Install brew casks"
-brew install --cask aerospace raycast vscodium
+install_package \
+	"brew packages" \
+	"brew install fd fzf gcc git lazygit neovim nnn pyenv ripgrep zoxide zsh-completions zsh-syntax-highlighting"
 
-echo "Install font family"
-brew install --cask font-zed-mono-nerd-font
+install_package \
+	"zsh plugin" \
+	"mkdir $HOME/zplugins; cd $HOME/zplugins;git clone https://github.com/Aloxaf/fzf-tab; cd -"
+
+install_package \
+	"brew casks" \
+	"brew install --cask aerospace jordanbaird-ice raycast stats vscodium"
+
+install_package \
+	"font family" \
+	"brew install --cask font-zed-mono-nerd-font"
+
+install_package \
+	"go language server" \
+	"go install golang.org/x/tools/gopls@latest"
