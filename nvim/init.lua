@@ -38,6 +38,8 @@ vim.opt.tabstop = 4
 vim.g.mapleader = ' '
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
+vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
+vim.keymap.set('n', '<C-q>', '<cmd>qa<cr>', { silent = true })
 
 -- Setup mini.deps
 require('mini.deps').setup({
@@ -150,20 +152,22 @@ if not vim.g.vscode then
 
 	later(function()
 		require('mini.pick').setup()
+
 		vim.keymap.set("n", "<leader>f", function()
-			MiniPick.builtin.cli({ 
-				command = {'fd', '-H' , '-t', 'file'}
-			})
+			MiniPick.builtin.cli({ command = {'fd', '-H' , '-t', 'file'} })
 		end)
 		vim.keymap.set("n", "<leader>g", function()
 			MiniPick.builtin.grep({ tool = 'rg' })
+		end)
+		vim.keymap.set("n", "<leader>b", function()
+			MiniPick.builtin.buffers()
 		end)
 	end)
 
 	later(function()
 		require('mini.snippets').setup()
 		require('mini.completion').setup({
-			delay = { completion = 200, info = 200, signature = 100 },
+			delay = { completion = 100, info = 100, signature = 50 },
 			window = {
 				info = { height = 20, width = 80,  border = 'single' },
 				signature = { height = 20, width = 80, border = 'single' },
