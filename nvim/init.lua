@@ -33,13 +33,15 @@ vim.opt.number = true
 vim.opt.pumheight = 15
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
 vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
-vim.keymap.set('n', '<C-q>', '<cmd>qa<cr>', { silent = true })
+vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
+vim.keymap.set({'n', 'v'}, '<C-y>', '"+y', { silent = true })
 
 -- Setup mini.deps
 require('mini.deps').setup({
@@ -109,11 +111,29 @@ if not vim.g.vscode then
 	end)
 
 	later(function()
+		-- Custom keybinding (imported from mini.basics and mini.bracketed)
+		-- \c and \C 	toggle cursorline and cursorcolumn
+		-- \d 			toggle diagnostic
+		-- \h 			toggle highlight
+		-- \r 			toggle relativenumber
+		-- \w 			toggle wrap
+		-- \z 			toggle stay-centered
+		-- [b ]b		navigate buffer
+		-- [d ]d		navigate diagnostic
+		add({ source = 'arnamak/stay-centered.nvim' })
+
+		require('stay-centered').setup()
 		require('mini.bracketed').setup()
-		local indentscope = require('mini.indentscope')
-		indentscope.setup({
-			delay = 200,
+		require('mini.basics').setup({
+			options = { basic = false },
+			mappings = { basic = false, windows = true },
+			autocommands = { basic = true },
 		})
+		require('mini.indentscope').setup({
+			delay = 50,
+		})
+
+		vim.keymap.set({ 'n', 'v' }, '\\z', require('stay-centered').toggle)
 	end)
 
 	later(function()
