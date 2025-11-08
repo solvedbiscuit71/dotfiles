@@ -41,7 +41,6 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
 vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
 vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
-vim.keymap.set({'n', 'v'}, '<C-y>', '"+y', { silent = true })
 
 -- Setup mini.deps
 require('mini.deps').setup({
@@ -117,6 +116,7 @@ if not vim.g.vscode then
 		-- \h 			toggle highlight
 		-- \r 			toggle relativenumber
 		-- \w 			toggle wrap
+		-- \y 			toggle system clipboard
 		-- \z 			toggle stay-centered
 		-- [b ]b		navigate buffer
 		-- [d ]d		navigate diagnostic
@@ -133,7 +133,30 @@ if not vim.g.vscode then
 			delay = 50,
 		})
 
-		vim.keymap.set({ 'n', 'v' }, '\\z', require('stay-centered').toggle)
+		local function toggle_unnamedplus()
+			local current_clip = vim.opt.clipboard:get()
+
+			local found = false
+			for _, item in ipairs(current_clip) do
+				if item == 'unnamedplus' then
+					found = true
+					break
+				end
+			end
+
+			if found then
+				vim.opt.clipboard:remove("unnamedplus")
+				vim.notify("System Clipboard: OFF)", vim.log.levels.INFO)
+			else
+				vim.opt.clipboard:append("unnamedplus")
+				vim.notify("System Clipboard: ON", vim.log.levels.INFO)
+			end
+		end
+		local toggle_stay_centered = require('stay-centered').toggle
+
+		-- Additional keybinding
+		vim.keymap.set('n', '\\z', toggle_stay_centered)
+		vim.keymap.set('n', '\\y', toggle_unnamedplus)
 	end)
 
 	later(function()
