@@ -85,7 +85,7 @@ later(function()
 		case_insensitive = false,
 		multi_windows = true,
 	})
-	vim.keymap.set('n', 'go', hop.hint_char1)
+	vim.keymap.set({'n', 'o', 'x'}, 'go', hop.hint_char1)
 end)
 
 if not vim.g.vscode then
