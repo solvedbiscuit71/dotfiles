@@ -29,14 +29,15 @@ end
 vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
+vim.opt.ignorecase = true
 vim.opt.number = true
 vim.opt.pumheight = 15
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
-vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
+vim.opt.wrap = false
 vim.g.mapleader = ' '
 vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
 vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
@@ -110,28 +111,47 @@ if not vim.g.vscode then
 	end)
 
 	later(function()
-		-- Custom keybinding (imported from mini.basics and mini.bracketed)
-		-- \c and \C 	toggle cursorline and cursorcolumn
-		-- \d 			toggle diagnostic
-		-- \h 			toggle highlight
-		-- \r 			toggle relativenumber
-		-- \w 			toggle wrap
-		-- \y 			toggle system clipboard
-		-- \z 			toggle stay-centered
-		-- [b ]b		navigate buffer
-		-- [d ]d		navigate diagnostic
+		local miniclue = require('mini.clue')
+		miniclue.setup({
+			triggers = {
+				-- Leader triggers
+				{ mode = 'n', keys = '<Leader>' },
+
+				-- Marks
+				{ mode = 'n', keys = "'" },
+				{ mode = 'n', keys = '`' },
+				{ mode = 'x', keys = "'" },
+				{ mode = 'x', keys = '`' },
+
+				-- Registers
+				{ mode = 'n', keys = '"' },
+				{ mode = 'x', keys = '"' },
+				{ mode = 'i', keys = '<C-r>' },
+				{ mode = 'c', keys = '<C-r>' },
+			},
+			clues = {
+				miniclue.gen_clues.marks(),
+				miniclue.gen_clues.registers(),
+			},
+			window = { delay = 200 },
+		})
+	end)
+
+	later(function()
 		add({ source = 'arnamak/stay-centered.nvim' })
 
 		require('stay-centered').setup()
 		require('mini.bracketed').setup()
 		require('mini.basics').setup({
 			options = { basic = false },
-			mappings = { basic = false, windows = true },
+			mappings = { 
+				basic = false,
+				option_toggle_prefix = [[<leader>t]],
+				windows = true,
+			},
 			autocommands = { basic = true },
 		})
-		require('mini.indentscope').setup({
-			delay = 50,
-		})
+		require('mini.indentscope').setup({ delay = 0 })
 
 		local function toggle_unnamedplus()
 			local current_clip = vim.opt.clipboard:get()
@@ -155,8 +175,8 @@ if not vim.g.vscode then
 		local toggle_stay_centered = require('stay-centered').toggle
 
 		-- Additional keybinding
-		vim.keymap.set('n', '\\z', toggle_stay_centered)
-		vim.keymap.set('n', '\\y', toggle_unnamedplus)
+		vim.keymap.set('n', '<leader>tz', toggle_stay_centered, { desc = "Toggle 'centered'"})
+		vim.keymap.set('n', '<leader>ty', toggle_unnamedplus, { desc = "Toggle 'clipboard'"})
 	end)
 
 	later(function()
@@ -190,21 +210,22 @@ if not vim.g.vscode then
 				max_number = 3,
 			},
 		})
-		vim.keymap.set('n', '<leader>n', MiniFiles.open)
+		vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = "Open MiniFiles" })
 	end)
 
 	later(function()
-		require('mini.pick').setup()
+		local pick = require('mini.pick')
+		pick.setup({ source = { show = pick.default_show } })
 
 		vim.keymap.set("n", "<leader>f", function()
 			MiniPick.builtin.cli({ command = {'fd', '-H' , '-t', 'file'} })
-		end)
+		end, { desc = "Find files"})
 		vim.keymap.set("n", "<leader>g", function()
 			MiniPick.builtin.grep({ tool = 'rg' })
-		end)
+		end, { desc = "Grep"})
 		vim.keymap.set("n", "<leader>b", function()
 			MiniPick.builtin.buffers()
-		end)
+		end, { desc = "Find buffers"})
 	end)
 
 	later(function()
@@ -241,10 +262,10 @@ if not vim.g.vscode then
 			vim.diagnostic.open_float({
 				scope = 'line',
 				border = 'single',
-			})
+			}, { desc = "Show diagnostic"})
 		end)
-		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code action" })
 		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
 		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition)
 
