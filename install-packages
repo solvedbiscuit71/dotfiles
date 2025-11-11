@@ -29,7 +29,7 @@ install_package \
 
 install_package \
 	"brew casks" \
-	"brew install --cask aerospace jordanbaird-ice raycast stats vscodium"
+	"brew install --cask aerospace jordanbaird-ice raycast sanesidebuttons stats vscodium"
 
 install_package \
 	"font family" \
