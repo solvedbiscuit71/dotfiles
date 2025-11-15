@@ -32,6 +32,10 @@ install_package \
 	"brew install --cask aerospace jordanbaird-ice raycast sanesidebuttons stats vscodium"
 
 install_package \
+	"kanata (requires manual setup; please refer to the README file)" \
+	"brew install kanata"
+
+install_package \
 	"font family" \
 	"brew install --cask font-zed-mono-nerd-font"
 

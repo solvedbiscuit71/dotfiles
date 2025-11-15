@@ -6,6 +6,9 @@ unlink $HOME/.zshrc
 unlink $HOME/.gitconfig
 unlink $HOME/.config/alacritty/alacritty.toml
 unlink $HOME/.config/nvim/init.lua
+unlink $HOME/.config/kanata/kanata.kbd
+rm ~/.config/kanata/com.example.kanata.plist
 
 rmdir $HOME/.config/alacritty
 rmdir $HOME/.config/nvim
+rmdir $HOME/.config/kanata
