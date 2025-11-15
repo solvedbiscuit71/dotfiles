@@ -117,12 +117,6 @@ if not vim.g.vscode then
 				-- Leader triggers
 				{ mode = 'n', keys = '<Leader>' },
 
-				-- Marks
-				{ mode = 'n', keys = "'" },
-				{ mode = 'n', keys = '`' },
-				{ mode = 'x', keys = "'" },
-				{ mode = 'x', keys = '`' },
-
 				-- Registers
 				{ mode = 'n', keys = '"' },
 				{ mode = 'x', keys = '"' },
@@ -133,7 +127,7 @@ if not vim.g.vscode then
 				miniclue.gen_clues.marks(),
 				miniclue.gen_clues.registers(),
 			},
-			window = { delay = 200 },
+			window = { delay = 400 },
 		})
 	end)
 
@@ -145,7 +139,7 @@ if not vim.g.vscode then
 		require('mini.basics').setup({
 			options = { basic = false },
 			mappings = { 
-				basic = false,
+				basic = true,
 				option_toggle_prefix = [[<leader>t]],
 				windows = true,
 			},
@@ -175,7 +169,7 @@ if not vim.g.vscode then
 		local toggle_stay_centered = require('stay-centered').toggle
 
 		-- Additional keybinding
-		vim.keymap.set('n', '<leader>tz', toggle_stay_centered, { desc = "Toggle 'centered'"})
+		vim.keymap.set('n', '<leader>tz', toggle_stay_centered, { desc = "Toggle 'stay_centered'"})
 		vim.keymap.set('n', '<leader>ty', toggle_unnamedplus, { desc = "Toggle 'clipboard'"})
 	end)
 
@@ -257,17 +251,18 @@ if not vim.g.vscode then
 				title = ' Documentation ',
 				title_pos = 'left',
 			})
-		end)
+		end, { desc = "Show documentation"})
 		vim.keymap.set('n', '<C-w>d', function()
 			vim.diagnostic.open_float({
 				scope = 'line',
 				border = 'single',
 			}, { desc = "Show diagnostic"})
 		end)
-		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
+		vim.keymap.set('n', 'R', vim.lsp.buf.rename, { desc = "Rename symbol" })
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code action" })
-		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition)
+		vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, { desc = "Goto implementation" })
+		vim.keymap.set('n', 'gR', vim.lsp.buf.references, { desc = "List references" })
+		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, { desc = "Goto definition" })
 
 		-- Language Server (Uses lspconfig)
 		vim.lsp.enable('gopls')
