@@ -11,8 +11,9 @@
 
 (defsrc
   u i p
-  a s d f g h j k l ;
+  caps a s d f g h j k l ;
   m , .
+  lmet lalt
 )
 
 (defvar
@@ -23,6 +24,7 @@
 )
 
 (defalias
+  caps (tap-hold $tap-time $hold-time esc caps)
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
@@ -36,16 +38,20 @@
   musr (mwheel-down $mouse-speed $mouse-dist)
   mlsr (mwheel-left $mouse-speed $mouse-dist)
   mrsr (mwheel-right $mouse-speed $mouse-dist)
+  lclk (tap-hold $tap-time $hold-time mlft lalt)
+  rclk (tap-hold $tap-time $hold-time mrgt ralt)
 )
 
 (deflayer base
   _ _ _
-  @a @s @d @f @g _ @j @k @l @;
+  @caps @a @s @d @f @g _ @j @k @l @;
   _ _ _
+  @rclk @lclk
 )
 
 (deflayer g-mode
   vold volu pp
-  _ _ _ _ _ @mlsr @mdsr @musr @mrsr lrld
+  _ _ _ _ _ _ @mlsr @mdsr @musr @mrsr lrld
   mute prev next
+  _ _
 )
