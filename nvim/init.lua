@@ -86,7 +86,8 @@ later(function()
 		case_insensitive = false,
 		multi_windows = true,
 	})
-	vim.keymap.set({'n', 'o', 'x'}, 'go', hop.hint_char1)
+	vim.keymap.set({'n', 'o', 'x'}, 'm', hop.hint_char1, { desc = "Move curosr", remap = false })
+	vim.keymap.set('n', '<leader>m', 'm', { desc = "Set mark" })
 end)
 
 if not vim.g.vscode then
