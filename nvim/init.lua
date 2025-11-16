@@ -145,8 +145,6 @@ if not vim.g.vscode then
 			},
 			autocommands = { basic = true },
 		})
-		require('mini.indentscope').setup({ delay = 0 })
-
 		local function toggle_unnamedplus()
 			local current_clip = vim.opt.clipboard:get()
 
