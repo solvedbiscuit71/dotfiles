@@ -38,8 +38,10 @@
   musr (mwheel-down $mouse-speed $mouse-dist)
   mlsr (mwheel-left $mouse-speed $mouse-dist)
   mrsr (mwheel-right $mouse-speed $mouse-dist)
-  lclk (tap-hold $tap-time $hold-time mlft lalt)
-  rclk (tap-hold $tap-time $hold-time mrgt ralt)
+
+  ;; f13 and f14 will be remapped to left and right click using mouseless
+  lclk (tap-hold $tap-time $hold-time f13 lmet)
+  rclk (tap-hold $tap-time $hold-time f14 lalt)
 )
 
 (deflayer base
