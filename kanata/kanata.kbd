@@ -1,26 +1,19 @@
 (defcfg
   process-unmapped-keys yes
+  danger-enable-cmd yes
 )
 
-;; QWERTY
-;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-;;   caps a    s    d    f    g    h    j    k    l    ;    '    ret
-;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-;;   lctl lmet lalt           spc            ralt rmet rctl
-
 (defsrc
-  u i p
-  caps a s d f g h j k l ;
-  m , .
-  lmet lalt
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (defvar
   tap-time 200
   hold-time 200
-  mouse-speed 100
-  mouse-dist 12
 )
 
 (defalias
@@ -29,31 +22,47 @@
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
   f (tap-hold $tap-time $hold-time f lmet)
-  g (tap-hold $tap-time $hold-time g (layer-while-held g-mode))
+  g (tap-hold $tap-time $hold-time g (layer-while-held service))
+  h (tap-hold $tap-time $hold-time h (layer-while-held service))
   j (tap-hold $tap-time $hold-time j rmet)
   k (tap-hold $tap-time $hold-time k ralt)
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
-  mdsr (mwheel-up $mouse-speed $mouse-dist)
-  musr (mwheel-down $mouse-speed $mouse-dist)
-  mlsr (mwheel-left $mouse-speed $mouse-dist)
-  mrsr (mwheel-right $mouse-speed $mouse-dist)
+  lmet (tap-hold $tap-time $hold-time C-a lmet)
 
-  ;; f13 and f14 will be remapped to left and right click using mouseless
-  lclk (tap-hold $tap-time $hold-time f13 lmet)
-  rclk (tap-hold $tap-time $hold-time f14 lalt)
+  spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
+  o-a (cmd open -a "Alacritty")
+  o-c (cmd open -a "VSCodium")
+  o-f (cmd open -a "Finder")
+  o-n (cmd open -a "Notes")
+  o-o (cmd open -a "Obsidian")
+  o-p (cmd open -a "Preview")
+  o-s (cmd open -a "System Settings")
+  o-r (cmd open -a "Raycast")
+  o-v (cmd open -a "Vivaldi")
+  o-w (cmd open -a "Whatsapp")
 )
 
 (deflayer base
-  _ _ _
-  @caps @a @s @d @f @g _ @j @k @l @;
-  _ _ _
-  @rclk @lclk
+  grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @caps @a   @s   @d   @f   @g   @h   @j   @k   @l   @;    '    ret
+  lsft   z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt @lmet         @spc            ralt rmet rctl
 )
 
-(deflayer g-mode
-  vold volu pp
-  _ _ _ _ _ _ @mlsr @mdsr @musr @mrsr lrld
-  mute prev next
-  _ _
+(deflayer service
+  grv  1    2    3    4    5    6    7    8    9    0    brdn brup bspc
+  tab  q    w    e    lrld t    y    pgup pgdn o    pp   [    ]    \
+  caps a    s    dnd  next g    lft  down up   rght ;    '    ret
+  lsft z    x    c    v    prev n    mute vold volu /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer app-launch
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    @o-w e    @o-r t    y    u    i    @o-o @o-p [    ]    \
+  caps @o-a @o-s d    @o-f g    h    j    k    l    ;    '    ret
+  lsft z    x    @o-c @o-v b    @o-n m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )

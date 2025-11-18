@@ -131,7 +131,6 @@ automatically-unhide-macos-hidden-apps = true
     alt-tab = 'focus-back-and-forth'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-	alt-a = 'mode app'
     alt-s = 'mode service'
     # alt-m = 'mode monitor'
 
@@ -166,19 +165,6 @@ automatically-unhide-macos-hidden-apps = true
     alt-j = ['join-with down', 'mode main']
     alt-k = ['join-with up', 'mode main']
     alt-l = ['join-with right', 'mode main']
-
-[mode.app.binding]
-    esc = 'mode main'
-
-	a = ['exec-and-forget open -a Alacritty', 'mode main']
-	c = ['exec-and-forget open -a VSCodium', 'mode main']
-	f = ['exec-and-forget open -a Finder', 'mode main']
-	n = ['exec-and-forget open -a Notes', 'mode main']
-	o = ['exec-and-forget open -a Obsidian', 'mode main']
-	p = ['exec-and-forget open -a Preview', 'mode main']
-	s = ['exec-and-forget open -a "System Settings"', 'mode main']
-	v = ['exec-and-forget open -a Vivaldi', 'mode main']
-	w = ['exec-and-forget open -a Whatsapp', 'mode main']
 
 # 'monitor' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
