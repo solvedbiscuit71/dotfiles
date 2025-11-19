@@ -3,8 +3,9 @@
   danger-enable-cmd yes
 )
 
+;; 60% keyboard layout
 (defsrc
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
@@ -17,7 +18,6 @@
 )
 
 (defalias
-  caps (tap-hold $tap-time $hold-time esc caps)
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
@@ -28,7 +28,10 @@
   k (tap-hold $tap-time $hold-time k ralt)
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
-  lmet (tap-hold $tap-time $hold-time C-a lmet)
+
+  ewd A-rght
+  bwd A-lft
+  lck M-C-q
 
   spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
   o-a (cmd open -a "Alacritty")
@@ -44,23 +47,23 @@
 )
 
 (deflayer base
-  grv    1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @caps @a   @s   @d   @f   @g   @h   @j   @k   @l   @;    '    ret
-  lsft   z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lalt @lmet         @spc            ralt rmet rctl
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt lmet          @spc            rmet ralt rctl
 )
 
 (deflayer service
-  grv  1    2    3    4    5    6    7    8    9    0    brdn brup bspc
-  tab  q    w    e    lrld t    y    pgup pgdn o    pp   [    ]    \
-  caps a    s    dnd  next g    lft  down up   rght ;    '    ret
-  lsft z    x    c    v    prev n    mute vold volu /    rsft
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
+  tab  @lck w    @ewd lrld t    y    pgup next prev pp   brdn brup \
+  caps a    s    pgdn f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    @bwd n    mute vold volu /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (deflayer app-launch
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    @o-w e    @o-r t    y    u    i    @o-o @o-p [    ]    \
   caps @o-a @o-s d    @o-f g    h    j    k    l    ;    '    ret
   lsft z    x    @o-c @o-v b    @o-n m    ,    .    /    rsft
