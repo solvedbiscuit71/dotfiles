@@ -15,25 +15,64 @@
 (defvar
   tap-time 200
   hold-time 200
+  scroll-speed 12
+  scroll-time 100
 )
 
+;; =============
+;; Base Layer
+;; =============
 (defalias
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
   f (tap-hold $tap-time $hold-time f lmet)
-  g (tap-hold $tap-time $hold-time g (layer-while-held service))
-  h (tap-hold $tap-time $hold-time h (layer-while-held service))
   j (tap-hold $tap-time $hold-time j rmet)
   k (tap-hold $tap-time $hold-time k ralt)
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
 
+  ;; press f15 to open mouseless overlay
+  m (tap-hold $tap-time $hold-time m f15)
+
+  ;; layer switching
+  g (tap-hold $tap-time $hold-time g (layer-while-held service))
+  h (tap-hold $tap-time $hold-time h (layer-while-held service))
+  spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    @m   ,    .    /    rsft
+  lctl lalt lmet          @spc            rmet ralt rctl
+)
+
+;; =============
+;; Service Layer
+;; =============
+(defalias
   ewd A-rght
   bwd A-lft
   lck M-C-q
 
-  spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
+  sup (tap-hold $tap-time $hold-time (mwheel-down $scroll-time $scroll-speed) pgup)
+  sdn (tap-hold $tap-time $hold-time (mwheel-up $scroll-time $scroll-speed) pgdn)
+)
+
+(deflayer service
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
+  tab  @lck w    @ewd lrld t    y    @sup next prev pp   brdn brup \
+  caps a    s    @sdn f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    @bwd n    mute vold volu /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; =============
+;; App Launcher
+;; =============
+(defalias
   o-a (cmd open -a "Alacritty")
   o-c (cmd open -a "VSCodium")
   o-f (cmd open -a "Finder")
@@ -44,22 +83,6 @@
   o-r (cmd open -a "Raycast")
   o-v (cmd open -a "Vivaldi")
   o-w (cmd open -a "Whatsapp")
-)
-
-(deflayer base
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lalt lmet          @spc            rmet ralt rctl
-)
-
-(deflayer service
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
-  tab  @lck w    @ewd lrld t    y    pgup next prev pp   brdn brup \
-  caps a    s    pgdn f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    @bwd n    mute vold volu /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (deflayer app-launch
