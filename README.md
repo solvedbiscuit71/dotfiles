@@ -30,9 +30,9 @@ Install Softwares
 2. Quit Karabinar-Elements.
 3. Download [kanata](https://github.com/jtroo/kanata/releases) pre-built binary.
 4. Copy the binary (with `cmd_allowed` enabled) to `/usr/local/bin/kanata`.
-5. Ensure the binary has been allowed "Input Monitoring" permission in System Settings under `Privacy > Input Monitoring`.
+5. Ensure the binary has been allowed "Input Monitoring" and "Accessibility" permission under `System Settings > Privacy`.
 6. Run the `install-config` script.
-6. Run the above commands in the terminal:
+7. Run the above commands in the terminal:
 
 ```sh
 sudo cp ~/.config/kanata/com.example.kanata.plist /Library/LaunchDaemons/com.example.kanata.plist
