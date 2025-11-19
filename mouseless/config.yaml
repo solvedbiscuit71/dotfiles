@@ -15,7 +15,7 @@ behavior_configs:
   multi_action_timeout_ms: 500
   name: main_behavior
   send_escape_after_global_alt_tap__windows: true
-  tap_threshold_ms: 150
+  tap_threshold_ms: 200
   wheel_easing: 0.275
   wheel_speed_multiplier: 2.0
   wheel_step_size: 100.0
@@ -269,7 +269,7 @@ keyboard_layout:
 keymaps:
 - entries:
     back click: null
-    back mouse button: O
+    back mouse button: null
     back mouse button (w/o overlay): null
     close UI element: Escape
     cycle click count: null
@@ -281,18 +281,18 @@ keymaps:
     decrease overlay opacity: null
     edit config: null
     enter free mode: null
-    execute mouse action: Space
+    execute mouse action: null
     execute mouse move: Option tap
-    exit free mode: Escape
+    exit free mode: null
     forward click: null
-    forward mouse button: I
+    forward mouse button: null
     forward mouse button (w/o overlay): null
     hide overlay: Escape
     hold for back button: null
-    hold for drag: null
+    hold for drag: Shift
     hold for forward button: null
     hold for middle button: null
-    hold for move: null
+    hold for move: Option
     hold for right button: Command
     hold for speed decrease: null
     hold for speed increase: null
@@ -301,35 +301,35 @@ keymaps:
     jump to left edge: null
     jump to right edge: null
     jump to top: null
-    left mouse button: F
+    left mouse button: null
     left mouse button (w/o overlay): null
     middle click: null
-    middle mouse button: E
+    middle mouse button: null
     middle mouse button (w/o overlay): null
-    move down: J
-    move left: H
-    move right: L
-    move up: K
+    move down: null
+    move left: null
+    move right: null
+    move up: null
     release hold/drag: Escape
     repeat last mouse action: null
     right click: Command tap
-    right mouse button: R
+    right mouse button: null
     right mouse button (w/o overlay): null
-    show overlay: Option tap
+    show overlay: F15
     subgrid nudge down: null
     subgrid nudge left: null
     subgrid nudge right: null
     subgrid nudge up: null
     switch monitor left: null
-    switch monitor right: Shift tap
+    switch monitor right: null
     toggle app enabled: null
     toggle continuous mode: null
     toggle continuous mode until closed: Tab
-    toggle free mode: Option+M
+    toggle free mode: null
     toggle overlay: null
     toggle overlay lock: null
     undo last key: Backspace
-    wheel down: D
+    wheel down: null
     wheel down fast: null
     wheel left: null
     wheel left fast: null
@@ -343,7 +343,7 @@ keymaps:
     wheel step right large: null
     wheel step up: null
     wheel step up large: null
-    wheel up: U
+    wheel up: null
     wheel up fast: null
   name: mac
 monitor_assignment_mode: auto
@@ -423,8 +423,8 @@ style_configs:
   - 1.0
   text_shadow_blur_radius: 2.0
   text_shadow_offset:
-  - 2.0
-  - 2.0
+  - 0
+  - 0
   text_shadow_rgba:
   - 0.00392156862745098
   - 0.00392156862745098
