@@ -56,16 +56,33 @@
   ewd A-rght
   bwd A-lft
   lck M-C-q
+  snm (layer-switch no-mod)
 
   sup (tap-hold $tap-time $hold-time (mwheel-down $scroll-time $scroll-speed) pgup)
   sdn (tap-hold $tap-time $hold-time (mwheel-up $scroll-time $scroll-speed) pgdn)
 )
 
 (deflayer service
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
-  tab  @lck w    @ewd lrld t    y    @sup next prev pp   brdn brup \
+  @snm f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
+  tab  @lck w    @ewd lrld t    y    @sup brdn brup pp   prev next    \
   caps a    s    @sdn f    g    lft  down up   rght home end  ret
   lsft z    x    c    v    @bwd n    mute vold volu /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+
+;; =============
+;; No Mods (Useful when practicing touch typing)
+;; =============
+(defalias
+  sbs (layer-switch base)
+)
+
+(deflayer no-mod
+  @sbs 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
