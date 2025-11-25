@@ -24,7 +24,9 @@ Install Softwares
 2. `install-config`: creates folder and symlinks to configuration files.
 3. `remove-config`: remove folder and unlink symlinks to configuration files.
 
-# Home-Row Mod (Advanced)
+# Advanced
+
+## Kanata
 
 1. Install [Karabinar-Elements](https://karabiner-elements.pqrs.org) and grant the requested premission.
 2. Quit Karabinar-Elements.
@@ -40,4 +42,19 @@ sudo launchctl enable system/com.example.kanata
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.example.kanata.plist
 ```
 
-7. Reboot the system.
+8. Reboot the system.
+
+## Marta
+
+1. Download and Install [Marta](https://marta.sh/docs/)
+2. To enable `marta` in the command line, run the following command
+
+```sh
+sudo ln -s /Applications/Marta.app/Contents/Resources/Launcher /usr/local/bin/marta
+```
+
+3. Since Marta maintains user configuration on its own, run the following command to overwrite (or) copy-paste the user configuration from `/marta/conf.marco`
+
+```sh
+cp marta/conf.marco "$HOME/Library/Application Support/org.yanex.marta/conf.marco"
+```

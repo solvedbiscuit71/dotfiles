@@ -1,0 +1,43 @@
+behavior {
+    theme "Kon"
+    
+    layout {
+        showActionBar false
+    }
+    
+    quickSelect {
+        activateOnAnyCharacter false
+    }
+}
+
+keyBindings {
+    "Cmd+P" "core.actions"
+    
+    "H" "core.go.up"
+    "L" "core.open"
+    "K" "core.move.up"
+    "J" "core.move.down"
+    "Space" "core.select.move.down"
+    
+    "E" "core.edit"
+    "Enter" "core.rename"
+    "N" "core.new.folder"
+    "D" "core.trash"
+    "P" "core.copy"
+    "V" "core.move"
+    
+    "G" "core.go"
+    "B" "core.favorites"
+    "R" "core.recent"
+    "M" "core.favorites.add"
+    "F" "core.lookup.here"
+    "O" "core.preview"
+    "I" "core.finder.showInfo"
+    "." "core.display.hidden"
+}
+
+etty {
+    fonts {
+        normal ["ZedMono Nerd Font" 12]
+    }
+}
