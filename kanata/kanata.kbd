@@ -32,9 +32,6 @@
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
 
-  ;; press f15 to open mouseless overlay
-  m (tap-hold $tap-time $hold-time m f15)
-
   ;; layer switching
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
@@ -45,7 +42,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c    v    b    n    @m   ,    .    /    rsft
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
@@ -56,17 +53,18 @@
   ewd A-rght
   bwd A-lft
   lck M-C-q
+  swd M-grv
   snm (layer-switch no-mod)
 
-  sup (tap-hold $tap-time $hold-time (mwheel-down $scroll-time $scroll-speed) pgup)
-  sdn (tap-hold $tap-time $hold-time (mwheel-up $scroll-time $scroll-speed) pgdn)
+  sup (mwheel-down $scroll-time $scroll-speed)
+  sdn (mwheel-up $scroll-time $scroll-speed)
 )
 
 (deflayer service
-  @snm f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  bspc
-  tab  @lck w    @ewd lrld t    y    @sup brdn brup pp   prev next    \
-  caps a    s    @sdn f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    @bwd n    mute vold volu /    rsft
+  @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
+  @swd @lck @ewd C-e  lrld t    y    @sup brdn brup pp   prev next    \
+  caps C-a  s    @sdn f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    @bwd n    f15  ,    pgup pgdn rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
