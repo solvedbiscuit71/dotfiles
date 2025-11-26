@@ -176,6 +176,6 @@ automatically-unhide-macos-hidden-apps = true
 # Assign workspaces to monitors
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-	1 = 'seondary' 	# Workspace dedicated for secondary display
+	1 = 'secondary' # Workspace dedicated for secondary display
 	2 = 'main' 		# Primary workspace
 	3 = 'main' 		# Secondary workspace
