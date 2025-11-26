@@ -11,21 +11,23 @@ behavior {
 }
 
 keyBindings {
-    "Cmd+P" "core.actions"
+    "Shift+;" "core.actions"
+    "Shift+1" "core.terminal.activate"
     
     "H" "core.go.up"
     "L" "core.open"
     "K" "core.move.up"
     "J" "core.move.down"
-    "Space" "core.select.move.down"
+    "Space" "core.select"
     
     "E" "core.edit"
     "Enter" "core.rename"
     "N" "core.new.folder"
     "D" "core.trash"
+    "X" "core.delete"
     "P" "core.copy"
     "V" "core.move"
-    
+
     "G" "core.go"
     "B" "core.favorites"
     "R" "core.recent"

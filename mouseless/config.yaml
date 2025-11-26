@@ -423,8 +423,8 @@ style_configs:
   - 1.0
   text_shadow_blur_radius: 2.0
   text_shadow_offset:
-  - 0
-  - 0
+  - 0.0
+  - 0.0
   text_shadow_rgba:
   - 0.00392156862745098
   - 0.00392156862745098
