@@ -34,7 +34,3 @@ install_package \
 install_package \
 	"font family" \
 	"brew install --cask font-zed-mono-nerd-font"
-
-install_package \
-	"go language server" \
-	"go install golang.org/x/tools/gopls@latest"
