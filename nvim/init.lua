@@ -13,18 +13,6 @@ if not vim.loop.fs_stat(mini_path) then
 	vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
--- Install lspconfig
-local lspconfig_path = vim.fn.stdpath('config') .. '/pack/nvim/start/nvim-lspconfig'
-if not vim.loop.fs_stat(lspconfig_path) then
-	vim.cmd('echo "Installing `lspconfig`" | redraw')
-	local clone_cmd = {
-		'git', 'clone',
-		'https://github.com/neovim/nvim-lspconfig', lspconfig_path
-	}
-	vim.fn.system(clone_cmd)
-	vim.cmd('echo "Installed `lspconfig`" | redraw')
-end
-
 -- Set options
 vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
 vim.opt.cursorcolumn = true
@@ -39,9 +27,6 @@ vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.wrap = false
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
-vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
-vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
 
 -- Setup mini.deps
 require('mini.deps').setup({
@@ -90,7 +75,21 @@ later(function()
 	vim.keymap.set('n', '<leader>m', 'm', { desc = "Set mark" })
 end)
 
-if not vim.g.vscode then
+if vim.g.vscode then
+	local vscode = require("vscode")
+	later(function()
+		-- Enable basic mapping only
+		require('mini.basics').setup({
+			options = { basic = false },
+			mappings = { 
+				basic = true,
+				option_toggle_prefix = '<leader>t',
+				windows = false,
+			},
+			autocommands = { basic = false },
+		})
+	end)
+else
 	now(function()
 		add({ source = 'ellisonleao/gruvbox.nvim' })
 
@@ -100,6 +99,10 @@ if not vim.g.vscode then
 		})
 		vim.o.termguicolors = true
 		vim.cmd('colorscheme gruvbox')
+
+		vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
+		vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
+		vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
 	end)
 
 	now(function()
@@ -133,19 +136,28 @@ if not vim.g.vscode then
 	end)
 
 	later(function()
-		add({ source = 'arnamak/stay-centered.nvim' })
-
-		require('stay-centered').setup()
 		require('mini.bracketed').setup()
 		require('mini.basics').setup({
 			options = { basic = false },
 			mappings = { 
 				basic = true,
-				option_toggle_prefix = [[<leader>t]],
+				option_toggle_prefix = '<leader>t',
 				windows = true,
 			},
 			autocommands = { basic = true },
 		})
+	end)
+
+	later(function()
+		add({ source = 'arnamak/stay-centered.nvim' })
+
+		local stay_centered = require('stay-centered')
+		stay_centered.setup()
+
+		vim.keymap.set('n', '<leader>tz', stay_centered.toggle, { desc = "Toggle 'stay_centered'"})
+	end)
+
+	later(function()
 		local function toggle_unnamedplus()
 			local current_clip = vim.opt.clipboard:get()
 
@@ -165,10 +177,6 @@ if not vim.g.vscode then
 				vim.notify("System Clipboard: ON", vim.log.levels.INFO)
 			end
 		end
-		local toggle_stay_centered = require('stay-centered').toggle
-
-		-- Additional keybinding
-		vim.keymap.set('n', '<leader>tz', toggle_stay_centered, { desc = "Toggle 'stay_centered'"})
 		vim.keymap.set('n', '<leader>ty', toggle_unnamedplus, { desc = "Toggle 'clipboard'"})
 	end)
 
@@ -238,32 +246,5 @@ if not vim.g.vscode then
 			end
 		end
 		vim.keymap.set('i', '<C-y>', 'v:lua.ctrl_y_action()', { expr = true })
-	end)
-
-	-- Setup LSP
-	later(function()
-		-- disable vim.lsp.buf.signature_help() because mini.completion has auto_signature
-		vim.keymap.del('i', '<C-s>')
-		vim.keymap.set('n', 'K', function()
-			vim.lsp.buf.hover({
-				border = 'single',
-				title = ' Documentation ',
-				title_pos = 'left',
-			})
-		end, { desc = "Show documentation"})
-		vim.keymap.set('n', '<C-w>d', function()
-			vim.diagnostic.open_float({
-				scope = 'line',
-				border = 'single',
-			}, { desc = "Show diagnostic"})
-		end)
-		vim.keymap.set('n', 'R', vim.lsp.buf.rename, { desc = "Rename symbol" })
-		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code action" })
-		vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, { desc = "Goto implementation" })
-		vim.keymap.set('n', 'gR', vim.lsp.buf.references, { desc = "List references" })
-		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, { desc = "Goto definition" })
-
-		-- Language Server (Uses lspconfig)
-		vim.lsp.enable('gopls')
 	end)
 end
