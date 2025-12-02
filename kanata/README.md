@@ -20,4 +20,10 @@ sudo launchctl bootstrap system /Library/LaunchDaemons/com.example.kanata.plist
 
 #### Windows
 
-> TODO: to be implemented soon.
+1. Download the pre-built binaries from [Releases](https://github.com/jtroo/kanata/releases) page.
+2. Extract the folder and move to `C:\` drive.
+3. Copy the `kanata-win32.kbd` file to the extracted folder and rename to `kanata.kbd`
+4. Create a shortcut for `kanata_windows_gui_winIOv2_cmd_allowed_x64` executable.
+5. Open run program (Win+R), and type `shell:startup` to open startup folder.
+6. Move the shortcut into the startup folder.
+7. Reboot the system.
