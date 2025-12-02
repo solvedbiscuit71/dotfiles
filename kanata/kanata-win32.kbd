@@ -1,0 +1,80 @@
+(defcfg
+  process-unmapped-keys yes
+  danger-enable-cmd yes
+)
+
+;; 60% keyboard layout
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tap-time 200
+  hold-time 200
+  scroll-speed 120
+  scroll-time 50
+)
+
+;; =============
+;; Base Layer
+;; =============
+(defalias
+  a (tap-hold $tap-time $hold-time a lsft)
+  s (tap-hold $tap-time $hold-time s lctl)
+  d (tap-hold $tap-time $hold-time d lalt)
+  f (tap-hold $tap-time $hold-time f lmet)
+  g (tap-hold $tap-time $hold-time g (layer-while-held service))
+  h (tap-hold $tap-time $hold-time h (layer-while-held service))
+  j (tap-hold $tap-time $hold-time j rmet)
+  k (tap-hold $tap-time $hold-time k ralt)
+  l (tap-hold $tap-time $hold-time l rctl)
+  ; (tap-hold $tap-time $hold-time ; rsft)
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lalt lmet lctl          spc            rctl rmet ralt
+)
+
+;; =============
+;; Service Layer
+;; =============
+(defalias
+  snm (layer-switch no-mod)
+
+  sdn (mwheel-down $scroll-time $scroll-speed)
+  sup (mwheel-up $scroll-time $scroll-speed)
+)
+
+(deflayer service
+  @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
+  tab  q    w    C-e  lrld t    y    @sup brdn brup pp   prev next    \
+  caps C-a  s    @sdn f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    b    n    f15  ,    pgup pgdn rsft
+  lalt lmet lctl          spc            rctl rmet ralt
+)
+
+
+;; =============
+;; No Mods (Useful when practicing touch typing)
+;; =============
+(defalias
+  sbs (layer-switch base)
+)
+
+(deflayer no-mod
+  @sbs 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+
