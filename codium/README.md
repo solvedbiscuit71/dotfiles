@@ -37,3 +37,7 @@ christian-kohler.path-intellisense
 eamodio.gitlens
 usernamehw.errorlens
 ```
+
+> NOTE:  
+> For `vscode-neovim` to work, you need to install `neovim` and `git`. Ensure the `git` executable is in the PATH variable.
+> Copy the `init.lua` file into `~/.config/nvim` (or) `%LocalAppData%\nvim` directory, and open `neovim` to install plugins.
