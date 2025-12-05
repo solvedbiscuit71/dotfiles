@@ -54,9 +54,15 @@
 (defalias
   ewd A-rght
   bwd A-lft
-  lck M-C-q
   swd M-grv
+  sns M-S-5
   snm (layer-switch no-mod)
+
+  ;; @assume A-q mapped to "quit all apps" in raycast
+  lck (macro A-q M-C-q)
+
+  ;; @assume mouseless mapped to "f15" for toggle overlay
+  mus f15
 
   sup (mwheel-down $scroll-time $scroll-speed)
   sdn (mwheel-up $scroll-time $scroll-speed)
@@ -64,9 +70,9 @@
 
 (deflayer service
   @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
-  @swd @lck @ewd C-e  lrld t    y    @sup brdn brup pp   prev next    \
-  caps C-a  s    @sdn f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    @bwd n    f15  ,    pgup pgdn rsft
+  @swd @lck @ewd C-e  lrld t    y    @sup i    o    pp   prev next    \
+  caps C-a  @sns @sdn f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    @bwd n    @mus ,    pgup pgdn rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
