@@ -7,8 +7,7 @@
 sudo ln -s /Applications/Marta.app/Contents/Resources/Launcher /usr/local/bin/marta
 ```
 
-3. Since Marta maintains user configuration on its own, run the following command to overwrite (or) copy-paste the user configuration from `/marta/conf.marco`
+3. Run the `install` script to setup symlink to conf.marco and favorites.marco.
 
-```sh
-cp marta/conf.marco "$HOME/Library/Application Support/org.yanex.marta/conf.marco"
-```
+> NOTE:  
+> Once installed, conf.marco is tracked by Git however favorites.marco is NOT tracked by Git.
