@@ -27,6 +27,8 @@ keyBindings {
     "O" "core.open"
     "K" "core.move.up"
     "J" "core.move.down"
+    "Shift+H" "core.clone.left"
+    "Shift+L" "core.clone.right"
     "Shift+J" "core.select.move.down"
     "Shift+K" "core.select.move.up"
     
@@ -45,7 +47,6 @@ keyBindings {
     "R" "core.recent"
     "M" "core.favorites.add"
     "F" "core.lookup.here"
-    "Space" "core.preview"
     "I" "core.finder.showInfo"
     "." "core.display.hidden"
 }
