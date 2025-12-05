@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+unlink $HOME/Library/Application\ Support/org.yanex.marta/conf.marco
+unlink $HOME/Library/Application\ Support/org.yanex.marta/favorites.marco
+rm -rf $HOME/.config/marta

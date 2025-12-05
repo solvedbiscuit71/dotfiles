@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+rm $HOME/Library/Application\ Support/org.yanex.marta/*.marco
+
+mkdir $HOME/.config/marta
+cp favorites.marco $HOME/.config/marta
+
+ln -s $PWD/conf.marco $HOME/Library/Application\ Support/org.yanex.marta/conf.marco
+ln -s $HOME/.config/marta/favorites.marco $HOME/Library/Application\ Support/org.yanex.marta/favorites.marco
