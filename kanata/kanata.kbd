@@ -13,18 +13,21 @@
 )
 
 (defvar
-  tap-time 200
-  hold-time 200
-  scroll-speed 12
-  scroll-time 100
+  tap-time    	200
+  hold-time  	200
+  time-out 		400
+  scroll-speed 	12
+  scroll-time 	100
 )
 
 ;; =============
 ;; Base Layer
 ;; =============
 (defalias
-  t (tap-hold $tap-time $hold-time t C-a)
-  y (tap-hold $tap-time $hold-time y C-a)
+  ;; sticky keys
+  sft (one-shot-press $time-out lsft)
+
+  ;; home-row mod
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
@@ -34,6 +37,9 @@
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
 
+  ;; used inside $TMUX
+  b (tap-hold $tap-time $hold-time b C-a)
+
   ;; layer switching
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
@@ -42,9 +48,9 @@
 
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    @t   @y   u    i    o    p    [    ]    \
+  tab  q    w    e    r    t    y   u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  @sft z    x    c    v    @b   n    m    ,    .    /    @sft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
