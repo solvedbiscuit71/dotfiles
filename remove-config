@@ -3,6 +3,7 @@
 unlink $HOME/.aerospace.toml
 unlink $HOME/.tmux.conf
 unlink $HOME/.zshrc
+rm $HOME/.zsh_config
 unlink $HOME/.gitconfig
 unlink $HOME/.config/alacritty/alacritty.toml
 unlink $HOME/.config/nvim/init.lua

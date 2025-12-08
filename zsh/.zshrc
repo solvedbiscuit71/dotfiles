@@ -51,14 +51,9 @@ fi
 # better `cd`
 eval "$(zoxide init --cmd cd zsh)"
 
-# =================
-# CLI configuration
-# =================
-
-# python
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-# go
-export PATH="$HOME/go/bin:$PATH"
+# ========================
+# platform specific config
+# ========================
+if [ -f "$HOME/.zsh_config" ]; then
+    source "$HOME/.zsh_config"
+fi
