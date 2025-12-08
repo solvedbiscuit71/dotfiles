@@ -104,8 +104,9 @@
 (defalias
   o-a (cmd open -a "Alacritty")
   o-c (cmd open -a "VSCodium")
-  o-f (cmd open -a "Marta")
+  o-f (cmd open -a "Finder")
   o-l (cmd open -a "LibreOffice")
+  o-m (cmd open -a "Marta")
   o-n (cmd open -a "Notes")
   o-o (cmd open -a "Obsidian")
   o-p (cmd open -a "Preview")
@@ -119,6 +120,6 @@
   esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    @o-w e    @o-r t    y    u    i    @o-o @o-p [    ]    \
   caps @o-a @o-s d    @o-f g    h    j    k    @o-l ;    '    ret
-  lsft z    x    @o-c @o-v b    @o-n m    ,    .    /    rsft
+  lsft z    x    @o-c @o-v b    @o-n @o-m ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
