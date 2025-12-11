@@ -15,6 +15,7 @@
 (defvar
   tap-time    	200
   hold-time  	200
+  caps-time		1000
   time-out 		400
   scroll-speed 	12
   scroll-time 	100
@@ -24,8 +25,7 @@
 ;; Base Layer
 ;; =============
 (defalias
-  ;; sticky keys
-  sft (one-shot-press $time-out lsft)
+  sft (tap-hold-press $tap-time $hold-time (caps-word $caps-time) lsft)
 
   ;; home-row mod
   a (tap-hold $tap-time $hold-time a lsft)
@@ -37,20 +37,20 @@
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
 
-  ;; used inside $TMUX
-  b (tap-hold $tap-time $hold-time b C-a)
-
   ;; layer switching
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
+  v (tap-hold $tap-time $hold-time v (layer-while-held tmux))
+  n (tap-hold $tap-time $hold-time n (layer-while-held tmux))
+
   spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
 )
 
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y   u    i    o    p    [    ]    \
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  @sft z    x    c    v    @b   n    m    ,    .    /    @sft
+  @sft z    x    c    @v    b   @n   m    ,    .    /    @sft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
@@ -95,6 +95,36 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; =============
+;; TMUX Keybind
+;; =============
+
+(defalias
+	t-n (macro C-a n)
+	t-/ (macro C-a /)
+	t-h (macro C-a h)
+	t-j (macro C-a j)
+	t-k (macro C-a k)
+	t-l (macro C-a l)
+	t-z (macro C-a z)
+	t-y (macro C-a y)
+	t-p (macro C-a p)
+	t-q (macro C-a q)
+	t-w (macro C-a w)
+	t-e (macro C-a e)
+
+	;; special case
+	t-a (macro C-a C-a)
+)
+
+(deflayer tmux
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  @t-q @t-w @t-e r    t    @t-y u    i    o    @t-p [    ]    \
+  caps @t-a s    d    f    g    @t-h @t-j @t-k @t-l ;    '    ret
+  lsft @t-z x    c    v    b    @t-n m    ,    .    @t-/ rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
