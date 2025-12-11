@@ -18,8 +18,10 @@ alias ve="python3 -m venv .venv"
 alias va="source .venv/bin/activate"
 alias ta="tmux attach -t"
 
-# shell prompt
-export PROMPT="%F{green}%n%F{white}@%F{green}%m %F{blue}%2~ %F{white}%# "
+# better prompt, improves readability
+NEWLINE=$'\n'
+STATUS="%(?.%F{white}~>.%F{red}~>)%f"
+export PROMPT="$NEWLINE%F{green}%n%f@%F{green}%m%f:%F{blue}%2~%f$NEWLINE$STATUS "
 
 # set editor to neovim
 export EDITOR="nvim"
