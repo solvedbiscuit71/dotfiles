@@ -154,38 +154,6 @@ else
 		})
 	end)
 
-	-- later(function()
-	-- 	add({ source = 'arnamak/stay-centered.nvim' })
-	--
-	-- 	local stay_centered = require('stay-centered')
-	-- 	stay_centered.setup()
-	--
-	-- 	vim.keymap.set('n', '<leader>tz', stay_centered.toggle, { desc = "Toggle 'stay_centered'"})
-	-- end)
-
-	-- later(function()
-	-- 	local function toggle_unnamedplus()
-	-- 		local current_clip = vim.opt.clipboard:get()
-	--
-	-- 		local found = false
-	-- 		for _, item in ipairs(current_clip) do
-	-- 			if item == 'unnamedplus' then
-	-- 				found = true
-	-- 				break
-	-- 			end
-	-- 		end
-	--
-	-- 		if found then
-	-- 			vim.opt.clipboard:remove("unnamedplus")
-	-- 			vim.notify("System Clipboard: OFF)", vim.log.levels.INFO)
-	-- 		else
-	-- 			vim.opt.clipboard:append("unnamedplus")
-	-- 			vim.notify("System Clipboard: ON", vim.log.levels.INFO)
-	-- 		end
-	-- 	end
-	-- 	vim.keymap.set('n', '<leader>ty', toggle_unnamedplus, { desc = "Toggle 'clipboard'"})
-	-- end)
-
 	later(function()
 		add({
 			source = 'nvim-treesitter/nvim-treesitter',
@@ -245,62 +213,5 @@ else
 			end
 		end
 		vim.keymap.set('i', '<C-y>', 'v:lua.ctrl_y_action()', { expr = true })
-	end)
-
-	later(function()
-		add({ source = 'tadmccorkle/markdown.nvim' })
-
-		-- concealed text is completely hidden unless
-		-- it has a custom replacement character defined.
-		vim.o.conceallevel = 2
-		vim.o.concealcursor = ""
-		vim.o.foldmethod = "marker"
-
-		require('markdown').setup({
-			mappings = {
-				inline_surround_toggle = "ys",
-				inline_surround_toggle_line = "yss",
-				inline_surround_delete = "ds",
-				inline_surround_change = "cs",
-				link_add = "ga",
-				link_follow = "gf",
-				go_curr_heading = false,
-				go_parent_heading = false,
-				go_next_heading = "]s",
-				go_prev_heading = "[s",
-			},
-			on_attach = function(bufnr)
-				local map = vim.keymap.set
-				local opts = { buffer = bufnr }
-				map('n', 'go', '<Cmd>MDListItemBelow<CR>', opts)
-				map('n', 'gO', '<Cmd>MDListItemAbove<CR>', opts)
-			end,
-		})
-
-		-- :New command creates a new markdown file from existing TEMPLATE.md
-		-- file in the current working directory
-		vim.api.nvim_create_user_command(
-			'New',
-			function(opts)
-				local fname = opts.fargs[1] .. '.md'
-				local exist = vim.system({"test", "-f", fname}, {text=true}):wait()
-				if exist.code == 0 then
-					-- if file exists then open
-					vim.cmd("edit " .. fname)
-				else
-					-- otherwise, create the file and then open
-					local status = vim.system({"cp", "TEMPLATE.md", fname}, {text=true}):wait()
-					if status.code == 0 then
-						-- if success then open
-						vim.cmd("edit " .. fname)
-					else
-						-- otherwise, echo
-						vim.cmd('echo "Failed"')
-					end
-				end
-
-			end,
-			{ nargs = 1 }
-		)
 	end)
 end

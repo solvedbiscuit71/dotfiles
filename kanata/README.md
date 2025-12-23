@@ -10,13 +10,19 @@
 6. Run the `install-config` script.
 7. Run the above commands in the terminal:
 
-```sh
+```bash
 sudo cp ~/.config/kanata/com.example.kanata.plist /Library/LaunchDaemons/com.example.kanata.plist
 sudo launchctl enable system/com.example.kanata
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.example.kanata.plist
 ```
 
 8. Reboot the system.
+
+NOTE: restart kanata when a new device is connected using the following command.
+
+```bash
+sudo launchctl kill 9 system/com.example.kanata
+```
 
 #### Windows
 

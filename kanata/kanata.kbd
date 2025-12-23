@@ -15,9 +15,7 @@
 (defvar
   tap-time    	200
   hold-time  	200
-  caps-time		1000
-  time-out 		400
-  scroll-speed 	12
+  scroll-speed  6
   scroll-time 	100
 )
 
@@ -25,8 +23,6 @@
 ;; Base Layer
 ;; =============
 (defalias
-  sft (tap-hold-press $tap-time $hold-time (caps-word $caps-time) lsft)
-
   ;; home-row mod
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
@@ -50,7 +46,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  @sft z    x    c    @v    b   @n   m    ,    .    /    @sft
+  lsft z    x    c    @v    b   @n   m    ,    .    /    rsft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
@@ -64,11 +60,10 @@
   sns M-S-5
   snm (layer-switch no-mod)
 
-  ;; @assume A-q mapped to "quit all apps" in raycast
-  lck (macro A-q M-C-q)
+  lck (macro M-C-q)
 
   ;; @assume mouseless mapped to "f15" for toggle overlay
-  mus f15
+  smm f15
 
   sup (mwheel-down $scroll-time $scroll-speed)
   sdn (mwheel-up $scroll-time $scroll-speed)
@@ -76,9 +71,9 @@
 
 (deflayer service
   @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
-  @swd @lck @ewd C-e  lrld t    y    @sup i    o    pp   prev next    \
-  caps C-a  @sns @sdn f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    @bwd n    @mus ,    pgup pgdn rsft
+  @swd @lck @ewd C-e  lrld t    y    u 	  i    o    pp   prev next    \
+  caps C-a  @sns d    f    g    lft  down up   rght home end  ret
+  lsft z    x    c    v    @bwd n    @smm ,    pgup pgdn rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
 
@@ -135,21 +130,19 @@
   o-a (cmd open -a "Alacritty")
   o-c (cmd open -a "VSCodium")
   o-f (cmd open -a "Finder")
-  o-l (cmd open -a "LibreOffice")
   o-m (cmd open -a "Marta")
   o-n (cmd open -a "Notes")
-  o-o (cmd open -a "Obsidian")
   o-p (cmd open -a "Preview")
   o-r (cmd open -a "Raycast")
   o-s (cmd open -a "System Settings")
+  o-t (cmd open -a "Anytype")
   o-v (cmd open -a "Vivaldi")
-  o-w (cmd open -a "Whatsapp")
 )
 
 (deflayer app-launch
   esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    @o-w e    @o-r t    y    u    i    @o-o @o-p [    ]    \
-  caps @o-a @o-s d    @o-f g    h    j    k    @o-l ;    '    ret
+  tab  q    w    e    @o-r @o-t y    u    i    o 	@o-p [    ]    \
+  caps @o-a @o-s d    @o-f g    h    j    k    l 	;    '    ret
   lsft z    x    @o-c @o-v b    @o-n @o-m ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
