@@ -23,7 +23,9 @@
 ;; Base Layer
 ;; =============
 (defalias
-  ;; home-row mod
+  sbs (layer-switch base)
+
+  ;; Home Row
   a (tap-hold $tap-time $hold-time a lsft)
   s (tap-hold $tap-time $hold-time s lctl)
   d (tap-hold $tap-time $hold-time d lalt)
@@ -33,12 +35,19 @@
   l (tap-hold $tap-time $hold-time l rctl)
   ; (tap-hold $tap-time $hold-time ; rsft)
 
-  ;; layer switching
+  ;; Service
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
+
+  ;; Media
+  c (tap-hold $tap-time $hold-time c (layer-while-held media))
+  m (tap-hold $tap-time $hold-time m (layer-while-held media))
+
+  ;; Tmux
   v (tap-hold $tap-time $hold-time v (layer-while-held tmux))
   n (tap-hold $tap-time $hold-time n (layer-while-held tmux))
 
+  ;; App Launcher
   spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
 )
 
@@ -46,73 +55,66 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c    @v    b   @n   m    ,    .    /    rsft
+  lsft z    x    @c   @v    b   @n   @m   ,    .    /    rsft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
 ;; =============
-;; Service Layer
+;; Service
 ;; =============
+
 (defalias
   ewd A-rght
   bwd A-lft
   swd M-grv
   sns M-S-5
+  lck M-C-q
+
   snm (layer-switch no-mod)
-
-  lck (macro M-C-q)
-
-  ;; @assume mouseless mapped to "f15" for toggle overlay
-  smm f15
-
-  sup (mwheel-down $scroll-time $scroll-speed)
-  sdn (mwheel-up $scroll-time $scroll-speed)
 )
 
 (deflayer service
-  @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
-  @swd @lck @ewd C-e  lrld t    y    u 	  i    o    pp   prev next    \
-  caps C-a  @sns d    f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    @bwd n    @smm ,    pgup pgdn rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  @snm 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @swd @lck w    @ewd lrld t    y    u 	  i    o    p    [    ]    \
+  caps a    @sns d    f    g    lft  down up   rght ;    '    ret
+  lsft z    x    c    v    @bwd n    m    ,    .    /	rsft
+  lctl lalt lmet           sft            rmet ralt rctl
 )
 
+;; =============
+;; Media
+;; =============
 
-;; =============
-;; No Mods (Useful when practicing touch typing)
-;; =============
 (defalias
-  sbs (layer-switch base)
+  cmp (tap-dance $hold-time (pp next prev))
 )
 
-(deflayer no-mod
-  @sbs 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+(deflayer media
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lsft z    x    c    v    b    n    mute vold volu /    rsft
+  lctl lmet lalt           @cmp           ralt rmet rctl
 )
 
 ;; =============
-;; TMUX Keybind
+;; Tmux
 ;; =============
 
 (defalias
-	t-n (macro C-a n)
 	t-/ (macro C-a /)
+	t-a (macro C-a C-a)
+	t-e (macro C-a e)
 	t-h (macro C-a h)
 	t-j (macro C-a j)
 	t-k (macro C-a k)
 	t-l (macro C-a l)
-	t-z (macro C-a z)
-	t-y (macro C-a y)
+	t-n (macro C-a n)
 	t-p (macro C-a p)
 	t-q (macro C-a q)
 	t-w (macro C-a w)
-	t-e (macro C-a e)
-
-	;; special case
-	t-a (macro C-a C-a)
+	t-y (macro C-a y)
+	t-z (macro C-a z)
 )
 
 (deflayer tmux
@@ -120,12 +122,13 @@
   tab  @t-q @t-w @t-e r    t    @t-y u    i    o    @t-p [    ]    \
   caps @t-a s    d    f    g    @t-h @t-j @t-k @t-l ;    '    ret
   lsft @t-z x    c    v    b    @t-n m    ,    .    @t-/ rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lctl lalt lmet           spc            rmet ralt rctl
 )
 
 ;; =============
 ;; App Launcher
 ;; =============
+
 (defalias
   o-a (cmd open -a "Alacritty")
   o-c (cmd open -a "VSCodium")
@@ -144,5 +147,21 @@
   tab  q    w    e    @o-r @o-t y    u    i    o 	@o-p [    ]    \
   caps @o-a @o-s d    @o-f g    h    j    k    l 	;    '    ret
   lsft z    x    @o-c @o-v b    @o-n @o-m ,    .    /    rsft
+  lctl lalt lmet           spc            rmet ralt rctl
+)
+
+;; =============
+;; No Mods
+;; =============
+
+(defalias 
+  esc (tap-hold $tap-time $hold-time esc @sbs)
+)
+
+(deflayer no-mod
+  @esc 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
