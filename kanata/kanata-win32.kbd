@@ -1,6 +1,5 @@
 (defcfg
   process-unmapped-keys yes
-  danger-enable-cmd yes
 )
 
 ;; 60% keyboard layout
@@ -15,8 +14,6 @@
 (defvar
   tap-time 200
   hold-time 200
-  scroll-speed 120
-  scroll-time 50
 )
 
 ;; =============
@@ -40,41 +37,22 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lalt lmet lctl          spc            rctl rmet ralt
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 ;; =============
 ;; Service Layer
 ;; =============
 (defalias
-  snm (layer-switch no-mod)
-
-  sdn (mwheel-down $scroll-time $scroll-speed)
-  sup (mwheel-up $scroll-time $scroll-speed)
+  sns M-S-s
+  nw C-rght
+  pw C-lft
 )
 
 (deflayer service
-  @snm 1    2    3    4    5    6    7    8    9    mute vold volu bspc
-  tab  q    w    C-e  lrld t    y    @sup brdn brup pp   prev next    \
-  caps C-a  s    @sdn f    g    lft  down up   rght home end  ret
-  lsft z    x    c    v    b    n    f15  ,    pgup pgdn rsft
-  lalt lmet lctl          spc            rctl rmet ralt
-)
-
-
-;; =============
-;; No Mods (Useful when practicing touch typing)
-;; =============
-(defalias
-  sbs (layer-switch base)
-)
-
-(deflayer no-mod
-  @sbs 1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc  
+  spc  q    @nw  end  r    t    y    u    i    o    p    [    ]    \
+  caps home @sns d    f    g  lft  down up   rght ;    '    ret
+  lsft z    x    c    v    @pw  n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet rctl
 )
-
-
