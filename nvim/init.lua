@@ -165,10 +165,6 @@ else
 		})
 
 		require('nvim-treesitter.configs').setup({
-			ensure_installed = { "markdown", "markdown_inline" },
-			markdown = {
-				enable = true,
-			},
 			auto_install = true,
 			ignore_install = {
 				'tmux',
