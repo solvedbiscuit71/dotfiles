@@ -1,0 +1,29 @@
+set scrolloff=5
+set number
+set relativenumber
+set incsearch
+
+map Q gq
+map gp "*p
+map gy "*y
+
+map m <Action>(AceAction)
+
+map R <Action>(RenameElement)
+map [d <Action>(GotoPreviousError)
+map ]d <Action>(GotoNextError)
+map g? <Action>(ShowErrorDescription)
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+" ReplaceWithRegister
+Plug 'vim-scripts/ReplaceWithRegister'
+
+" Surround
+Plug 'tpope/vim-surround'
