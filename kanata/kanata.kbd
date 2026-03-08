@@ -136,7 +136,7 @@
 
 (defalias
   o-a (cmd open -a "Anytype")
-  o-c (cmd open -a "VSCodium")
+  o-c (cmd open -a "Visual Studio Code")
   o-f (cmd open -a "Finder")
   o-m (cmd open -a "Marta")
   o-n (cmd open -a "Notes")

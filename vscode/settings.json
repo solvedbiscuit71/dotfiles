@@ -1,0 +1,56 @@
+{
+    // color theme
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+
+    // font settings
+    "editor.fontFamily": "Victor Mono",
+    "editor.fontSize": 16,
+    "editor.lineNumbers": "relative",
+    "terminal.integrated.fontSize": 16,
+
+    // editor settings
+    "workbench.startupEditor": "none",
+
+    // vim settings
+    "vim.leader": " ",
+    "vim.easymotion": true,
+    "vim.replaceWithRegister": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "#fe801920",
+    "vim.useCtrlKeys": true,
+    "vim.useSystemClipboard": false,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["g", "y"],
+            "after": ["\"", "*", "y"]
+        },
+        {
+            "before": ["g", "p"],
+            "after": ["\"", "*", "p"]
+        },
+        {
+            "before": ["m"],
+            "after": ["leader", "leader", "s"]
+        },
+        {
+            "before": ["leader", "f"],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": ["leader", "d"],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ]
+        }
+    ],
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+
+    // Copilot settings
+    "github.copilot.enable": {
+        "*": false
+    }
+}

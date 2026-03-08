@@ -35,7 +35,7 @@ args = ["new-session", "-A", "-s", "home"]
 
 
 [font]
-normal = { family = "ZedMono Nerd Font" }
+normal = { family = "Victor Mono" }
 builtin_box_drawing = true
 size = 18
 
