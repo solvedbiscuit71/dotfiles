@@ -12,6 +12,7 @@ ln -s $PWD/git/.gitconfig $HOME/.gitconfig
 ln -s $PWD/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 ln -s $PWD/nvim/init.lua $HOME/.config/nvim/init.lua
 ln -s $PWD/kanata/kanata.kbd $HOME/.config/kanata/kanata.kbd
+ln -s $PWD/vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 
 # Replace $HOME with the expansion of $HOME
 sed "s#\$HOME#$HOME#g" kanata/com.example.kanata.plist > ~/.config/kanata/com.example.kanata.plist
