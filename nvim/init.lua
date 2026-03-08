@@ -68,146 +68,126 @@ later(function()
 	vim.keymap.set('n', 'yss', 'ys_', { remap = true })
 	vim.keymap.set({'n', 'o', 'x'}, 'm', hop.hint_char1, { desc = "Move curosr", remap = false })
 	vim.keymap.set('n', '<leader>m', 'm', { desc = "Set mark" })
-	vim.keymap.set('o', '%', '<cmd>normal!ggVG<cr>', { silent = true, remap = false })
+	vim.keymap.set('n', '<leader>d', ':bd<CR>', { desc = "Buffer delete" })
+end)
+
+now(function()
+	add({ source = 'ellisonleao/gruvbox.nvim' })
+
+	require('gruvbox').setup({
+		transparent_mode = true
+	})
+	require('mini.tabline').setup({
+		use_icons = false
+	})
+	require('mini.statusline').setup({
+		use_icons = false
+	})
+	require('mini.files').setup({
+		use_icons = false,
+		content = { prefix = function() end, },
+		windows = {
+			max_number = 3,
+		},
+		options = {
+			use_as_default_explorer = true,
+		},
+	})
+
+	vim.o.hlsearch = false
+	vim.o.termguicolors = true
+	vim.cmd('colorscheme gruvbox')
+
+	vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
+	vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
+	vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
+	vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = "Open MiniFiles" })
 end)
 
 later(function()
+	require('mini.bracketed').setup()
+	require('mini.basics').setup({
+		options = { basic = false },
+		mappings = { 
+			basic = true,
+			option_toggle_prefix = '<leader>t',
+			windows = true,
+		},
+		autocommands = { basic = true },
+	})
+	local miniclue = require('mini.clue')
+	miniclue.setup({
+		triggers = {
+			-- Leader triggers
+			{ mode = 'n', keys = '<Leader>' },
+
+			-- Registers
+			{ mode = 'n', keys = '"' },
+			{ mode = 'x', keys = '"' },
+			{ mode = 'i', keys = '<C-r>' },
+			{ mode = 'c', keys = '<C-r>' },
+		},
+		clues = {
+			miniclue.gen_clues.marks(),
+			miniclue.gen_clues.registers(),
+		},
+		window = { delay = 400 },
+	})
 end)
 
-if vim.g.vscode then
-	local vscode = require("vscode")
-	later(function()
-		-- Enable basic mapping only
-		-- `gy` and `gp` for system clipboard
-		require('mini.basics').setup({
-			options = { basic = false },
-			mappings = { 
-				basic = true,
-				option_toggle_prefix = '<leader>t',
-				windows = false,
-			},
-			autocommands = { basic = false },
-		})
-	end)
-else
-	now(function()
-		add({ source = 'ellisonleao/gruvbox.nvim' })
+later(function()
+	add({
+		source = 'nvim-treesitter/nvim-treesitter',
+		checkout = 'master',
+		monitor = 'main',
+		hooks = { post_checkout = function()
+			vim.cmd('TSUpdate')
+		end },
+	})
 
-		require('gruvbox').setup({
-			transparent_mode = true
-		})
-		require('mini.tabline').setup({
-			use_icons = false
-		})
-		require('mini.statusline').setup({
-			use_icons = false
-		})
-		require('mini.files').setup({
-			use_icons = false,
-			content = { prefix = function() end, },
-			windows = {
-				max_number = 3,
-			},
-			options = {
-				use_as_default_explorer = true,
-			},
-		})
-
-		vim.o.hlsearch = false
-		vim.o.termguicolors = true
-		vim.cmd('colorscheme gruvbox')
-
-		vim.keymap.set('n', '<C-b>', '<C-^>', { silent = true })
-		vim.keymap.set('n', '<C-c>', '<cmd>bd<cr>', { silent = true })
-		vim.keymap.set('n', '<C-C>', '<cmd>bd!<cr>', { silent = true })
-		vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = "Open MiniFiles" })
-	end)
-
-	later(function()
-		require('mini.bracketed').setup()
-		require('mini.basics').setup({
-			options = { basic = false },
-			mappings = { 
-				basic = true,
-				option_toggle_prefix = '<leader>t',
-				windows = true,
-			},
-			autocommands = { basic = true },
-		})
-		local miniclue = require('mini.clue')
-		miniclue.setup({
-			triggers = {
-				-- Leader triggers
-				{ mode = 'n', keys = '<Leader>' },
-
-				-- Registers
-				{ mode = 'n', keys = '"' },
-				{ mode = 'x', keys = '"' },
-				{ mode = 'i', keys = '<C-r>' },
-				{ mode = 'c', keys = '<C-r>' },
-			},
-			clues = {
-				miniclue.gen_clues.marks(),
-				miniclue.gen_clues.registers(),
-			},
-			window = { delay = 400 },
-		})
-	end)
-
-	later(function()
-		add({
-			source = 'nvim-treesitter/nvim-treesitter',
-			checkout = 'master',
-			monitor = 'main',
-			hooks = { post_checkout = function()
-				vim.cmd('TSUpdate')
-			end },
-		})
-
-		require('nvim-treesitter.configs').setup({
-			auto_install = true,
-			ignore_install = {
-				'tmux',
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			}
-		})
-	end)
+	require('nvim-treesitter.configs').setup({
+		auto_install = true,
+		ignore_install = {
+			'tmux',
+		},
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+		}
+	})
+end)
 
 
-	later(function()
-		local pick = require('mini.pick')
-		pick.setup({ source = { show = pick.default_show } })
+later(function()
+	local pick = require('mini.pick')
+	pick.setup({ source = { show = pick.default_show } })
 
-		vim.keymap.set("n", "<leader>f", function()
-			MiniPick.builtin.cli({ command = {'fd', '-H' , '-t', 'file'} })
-		end, { desc = "Find files"})
-		vim.keymap.set("n", "<leader>g", function()
-			MiniPick.builtin.grep({ tool = 'rg' })
-		end, { desc = "Grep"})
-		vim.keymap.set("n", "<leader>b", function()
-			MiniPick.builtin.buffers()
-		end, { desc = "Find buffers"})
-	end)
+	vim.keymap.set("n", "<leader>f", function()
+		MiniPick.builtin.cli({ command = {'fd', '-H' , '-t', 'file'} })
+	end, { desc = "Find files"})
+	vim.keymap.set("n", "<leader>g", function()
+		MiniPick.builtin.grep({ tool = 'rg' })
+	end, { desc = "Grep"})
+	vim.keymap.set("n", "<leader>b", function()
+		MiniPick.builtin.buffers()
+	end, { desc = "Find buffers"})
+end)
 
-	later(function()
-		require('mini.snippets').setup()
-		require('mini.completion').setup({
-			delay = { completion = 100, info = 100, signature = 50 },
-			window = {
-				info = { height = 20, width = 80,  border = 'single' },
-				signature = { height = 20, width = 80, border = 'single' },
-			},
-		})
-		_G.ctrl_y_action = function()
-			if vim.fn.pumvisible() == 1 and vim.fn.complete_info().selected == -1 then
-				return '<C-n><C-y>'
-			else
-				return '<C-y>'
-			end
+later(function()
+	require('mini.snippets').setup()
+	require('mini.completion').setup({
+		delay = { completion = 100, info = 100, signature = 50 },
+		window = {
+			info = { height = 20, width = 80,  border = 'single' },
+			signature = { height = 20, width = 80, border = 'single' },
+		},
+	})
+	_G.ctrl_y_action = function()
+		if vim.fn.pumvisible() == 1 and vim.fn.complete_info().selected == -1 then
+			return '<C-n><C-y>'
+		else
+			return '<C-y>'
 		end
-		vim.keymap.set('i', '<C-y>', 'v:lua.ctrl_y_action()', { expr = true })
-	end)
-end
+	end
+	vim.keymap.set('i', '<C-y>', 'v:lua.ctrl_y_action()', { expr = true })
+end)

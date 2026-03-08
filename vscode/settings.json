@@ -39,6 +39,12 @@
             ]
         },
         {
+            "before": ["leader", "g"],
+            "commands": [
+                "workbench.action.findInFiles"
+            ]
+        },
+        {
             "before": ["leader", "d"],
             "commands": [
                 "workbench.action.closeActiveEditor"
