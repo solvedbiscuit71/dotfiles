@@ -1,0 +1,39 @@
+[
+    {
+        "key": "space f",
+        "command": "workbench.action.quickOpen",
+        "when": "!editorTextFocus && !inputFocus && !textInputFocus"
+    },
+    {
+        "key": "cmd+p",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "space n",
+        "command": "workbench.view.explorer",
+        "when": "!editorTextFocus && !inputFocus && !textInputFocus"
+    },
+    {
+        "key": "shift+cmd+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "space p",
+        "command": "workbench.action.showCommands",
+        "when": "!editorTextFocus && !inputFocus && !textInputFocus"
+    },
+    {
+        "key": "shift+cmd+p",
+        "command": "-workbench.action.showCommands"
+    },
+    {
+        "key": "space d",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus && !inputFocus && !textInputFocus"
+    },
+    {
+        "key": "cmd+w",
+        "command": "-workbench.action.closeActiveEditor"
+    }
+]

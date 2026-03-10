@@ -8,6 +8,7 @@
     "editor.lineNumbers": "relative",
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 90,
+    "editor.accessibilitySupport": "off",
     "terminal.integrated.fontSize": 16,
     "zenMode.hideLineNumbers": false,
 
@@ -52,15 +53,21 @@
             ]
         },
         {
-            "before": ["leader", "g"],
-            "commands": [
-                "workbench.action.findInFiles"
-            ]
-        },
-        {
             "before": ["leader", "d"],
             "commands": [
                 "workbench.action.closeActiveEditor"
+            ]
+        },
+        {
+            "before": ["leader", "n"],
+            "commands": [
+                "workbench.view.explorer"
+            ]
+        },
+        {
+            "before": ["leader", "p"],
+            "commands": [
+                "workbench.action.showCommands"
             ]
         }
     ],
