@@ -9,7 +9,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lctl lalt lmet           spc            rmet ralt rctl
 )
 
 (defvar
@@ -39,10 +39,6 @@
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
 
-  ;; Media
-  c (tap-hold $tap-time $hold-time c (layer-while-held media))
-  m (tap-hold $tap-time $hold-time m (layer-while-held media))
-
   ;; Tmux
   v (tap-hold $tap-time $hold-time v (layer-while-held tmux))
   n (tap-hold $tap-time $hold-time n (layer-while-held tmux))
@@ -55,7 +51,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    @c   @v    b   @n   @m   ,    .    /    rsft
+  lsft z    x    c   @v    b   @n    m   ,    .    /    rsft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
@@ -71,30 +67,15 @@
   lck M-C-q
 
   snm (layer-switch no-mod)
+  cmp (tap-dance $hold-time (pp next prev))
 )
 
 (deflayer service
   @snm 1    2    3    4    5    6    7    8    9    0    -    =    bspc
   @swd @lck w    @ewd lrld t    y    u 	  i    o    p    [    ]    \
   caps a    @sns d    f    g    lft  down up   rght ;    '    ret
-  lsft z    x    c    v    @bwd n    m    ,    .    /	rsft
-  lctl lalt lmet           sft            rmet ralt rctl
-)
-
-;; =============
-;; Media
-;; =============
-
-(defalias
-  cmp (tap-dance $hold-time (pp next prev))
-)
-
-(deflayer media
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    mute vold volu /    rsft
-  lctl lmet lalt           @cmp           ralt rmet rctl
+  lsft z    x    c    v    @bwd n    mute vold volu /	   rsft
+  lctl lalt lmet           @cmp           rmet ralt rctl
 )
 
 ;; =============
@@ -170,5 +151,5 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lctl lalt lmet           spc            rmet ralt rctl
 )
