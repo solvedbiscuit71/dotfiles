@@ -2,13 +2,16 @@
     // color theme
     "workbench.colorTheme": "Gruvbox Dark Hard",
 
-    // font settings
+    // editor settings
     "editor.fontFamily": "Victor Mono",
     "editor.fontSize": 16,
     "editor.lineNumbers": "relative",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 90,
     "terminal.integrated.fontSize": 16,
+    "zenMode.hideLineNumbers": false,
 
-    // editor settings
+    // window settings
     "workbench.startupEditor": "none",
 
     // vim settings
@@ -19,6 +22,16 @@
     "vim.highlightedyank.color": "#fe801920",
     "vim.useCtrlKeys": true,
     "vim.useSystemClipboard": false,
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["g", "y"],
+            "after": ["\"", "*", "y"]
+        },
+        {
+            "before": ["g", "p"],
+            "after": ["\"", "*", "p"]
+        }
+    ],
     "vim.normalModeKeyBindings": [
         {
             "before": ["g", "y"],
