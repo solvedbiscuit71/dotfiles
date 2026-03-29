@@ -1,8 +1,4 @@
 {
-    // color theme
-    "workbench.colorTheme": "Gruvbox Dark Hard",
-
-    // editor settings
     "editor.fontFamily": "Victor Mono",
     "editor.fontSize": 16,
     "editor.lineNumbers": "relative",
@@ -31,6 +27,10 @@
         {
             "before": ["g", "p"],
             "after": ["\"", "*", "p"]
+        },
+        {
+            "before": ["m"],
+            "after": ["leader", "leader", "s"]
         }
     ],
     "vim.normalModeKeyBindings": [
@@ -75,8 +75,5 @@
         "vscodevim.vim": 1
     },
 
-    // Copilot settings
-    "github.copilot.enable": {
-        "*": false
-    }
+    "extensions.ignoreRecommendations": true
 }
