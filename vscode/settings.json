@@ -1,15 +1,19 @@
 {
-    "editor.fontFamily": "Victor Mono",
+    // editor settings
+    "editor.fontFamily": "IBM Plex Mono",
     "editor.fontSize": 16,
     "editor.lineNumbers": "relative",
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 90,
+    "editor.minimap.enabled": false,
+    "editor.acceptSuggestionOnEnter": "smart",
     "editor.accessibilitySupport": "off",
     "terminal.integrated.fontSize": 16,
     "zenMode.hideLineNumbers": false,
 
     // window settings
     "workbench.startupEditor": "none",
+    "workbench.sideBar.location": "right",
+    "workbench.activityBar.location": "top",
+    "workbench.panel.showLabels": false,
 
     // vim settings
     "vim.leader": " ",
