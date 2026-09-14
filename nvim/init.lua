@@ -26,6 +26,7 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.wrap = false
+vim.opt.linebreak=true
 vim.g.mapleader = ' '
 
 -- Setup mini.deps
@@ -134,29 +135,6 @@ later(function()
 		window = { delay = 400 },
 	})
 end)
-
-later(function()
-	add({
-		source = 'nvim-treesitter/nvim-treesitter',
-		checkout = 'master',
-		monitor = 'main',
-		hooks = { post_checkout = function()
-			vim.cmd('TSUpdate')
-		end },
-	})
-
-	require('nvim-treesitter.configs').setup({
-		auto_install = true,
-		ignore_install = {
-			'tmux',
-		},
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		}
-	})
-end)
-
 
 later(function()
 	local pick = require('mini.pick')
