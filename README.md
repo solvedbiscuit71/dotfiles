@@ -21,10 +21,13 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Additional Softwares
 
-1. [Ariv Tools](https://ariv.one/tools/)
-2. [Battery Toolkit](https://github.com/mhaeuser/Battery-Toolkit)
-3. [Dropshelf](https://pilotmoon.com/dropshelf/)
-4. [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
-5. [Ice](https://github.com/jordanbaird/Ice)
-6. [Obsidian](https://github.com/obsidianmd/obsidian-releases)
-7. [Stats](https://github.com/exelban/stats)
+- [Ariv Tools](https://ariv.one/tools/)
+- [Battery Toolkit](https://github.com/mhaeuser/Battery-Toolkit)
+- [Dropshelf](https://pilotmoon.com/dropshelf/)
+- [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
+- [Ice](https://github.com/jordanbaird/Ice)
+- [Obsidian](https://github.com/obsidianmd/obsidian-releases)
+- [SaneSideButtons](https://github.com/thealpa/SaneSideButtons)
+- [Stats](https://github.com/exelban/stats)
+- [Vicinae](https://www.vicinae.com)
+- [Vivaldi](https://vivaldi.com)
