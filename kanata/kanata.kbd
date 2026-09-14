@@ -39,10 +39,6 @@
   g (tap-hold $tap-time $hold-time g (layer-while-held service))
   h (tap-hold $tap-time $hold-time h (layer-while-held service))
 
-  ;; Tmux
-  v (tap-hold $tap-time $hold-time v (layer-while-held tmux))
-  n (tap-hold $tap-time $hold-time n (layer-while-held tmux))
-
   ;; App Launcher
   spc (tap-hold $tap-time $hold-time spc (layer-while-held app-launch))
 )
@@ -51,7 +47,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c   @v    b   @n    m   ,    .    /    rsft
+  lsft z    x    c    v    b    n    m   ,    .    /    rsft
   lctl lalt lmet          @spc            rmet ralt rctl
 )
 
@@ -79,62 +75,25 @@
 )
 
 ;; =============
-;; Tmux
-;; =============
-
-(defalias
-	;; direct mapping to tmux/.tmux.conf
-	t-t (macro C-a t)
-	t-/ (macro C-a /)
-	t-p (macro C-a p)
-	t-n (macro C-a n)
-
-	t-h (macro C-a h)
-	t-l (macro C-a l)
-	t-z (macro C-a z)
-
-	t-q (macro C-a q)
-	t-w (macro C-a w)
-	t-e (macro C-a e)
-
-	;; default mapping in tmux
-	t-[ (macro C-a [)
-	t-] (macro C-a ])
-	t-a (macro C-a C-a)
-)
-
-(deflayer tmux
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  @t-q @t-w @t-e r    @t-t y    u    i    o    @t-p @t-[ @t-] \
-  caps @t-a s    d    f    g    @t-h j    k    @t-l ;    '    ret
-  lsft @t-z x    c    v    b    @t-n m    ,    .    @t-/ rsft
-  lctl lalt lmet           spc            rmet ralt rctl
-)
-
-;; =============
 ;; App Launcher
 ;; =============
 
 (defalias
-  o-a (cmd open -a "Anytype")
+  o-a (cmd open -a "Alacritty")
   o-c (cmd open -a "Visual Studio Code")
   o-f (cmd open -a "Finder")
-  o-m (cmd open -a "Marta")
-  o-n (cmd open -a "Notes")
-  o-p (cmd open -a "Preview")
   o-r (cmd open -a "Raycast")
   o-s (cmd open -a "System Settings")
-  o-t (cmd open -a "Alacritty")
   o-v (cmd open -a "Vivaldi")
-  o-u (cmd open -a "UTM")
   o-l (cmd open -a "LibreOffice")
+  o-w (cmd open -a "WhatsApp")
 )
 
 (deflayer app-launch
   esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    @o-r @o-t y    @o-u i    o 	@o-p [    ]    \
+  tab  q    @o-w e    @o-r t    y    u	  i    o 	p    [    ]    \
   caps @o-a @o-s d    @o-f g    h    j    k    @o-l ;    '    ret
-  lsft z    x    @o-c @o-v b    @o-n @o-m ,    .    /    rsft
+  lsft z    x    @o-c @o-v b    n    m    ,    .    /    rsft
   lctl lalt lmet           spc            rmet ralt rctl
 )
 
