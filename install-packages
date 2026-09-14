@@ -26,11 +26,3 @@ install_package \
 install_package \
 	"zsh plugin" \
 	"mkdir $HOME/zplugins; cd $HOME/zplugins;git clone https://github.com/Aloxaf/fzf-tab; cd -"
-
-install_package \
-	"brew casks" \
-	"brew install --cask aerospace jordanbaird-ice raycast sanesidebuttons stats vscodium"
-
-install_package \
-	"font family" \
-	"brew install --cask font-zed-mono-nerd-font"
