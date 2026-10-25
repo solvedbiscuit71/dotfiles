@@ -1,13 +1,14 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = [
-    # JankyBorders has a built-in detection of already running process,
-    # so it won't be run twice on AeroSpace restart
-	# 'exec-and-forget borders active_color=0xff90a959 inactive_color=0x00000000 width=2.0 whitelist="Alacritty"'
-]
+after-startup-command = []
 
 # Start AeroSpace at login
 start-at-login = true
@@ -22,7 +23,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 accordion-padding = 30
 
 # Possible values: tiles|accordion
-default-root-container-layout = 'accordion'
+default-root-container-layout = 'tiles'
 
 # Possible values: horizontal|vertical|auto
 # 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
@@ -39,12 +40,11 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
-automatically-unhide-macos-hidden-apps = true
+automatically-unhide-macos-hidden-apps = false
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
-[key-mapping]
-    preset = 'qwerty'
+key-mapping.preset = 'qwerty'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -54,13 +54,12 @@ automatically-unhide-macos-hidden-apps = true
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-[gaps]
-    inner.horizontal = 8
-    inner.vertical =   8
-    outer.left =       8
-    outer.bottom =     8
-    outer.top =        8
-    outer.right =      8
+gaps.inner.horizontal = 8
+gaps.inner.vertical =   8
+gaps.outer.left =       4
+gaps.outer.bottom =     4
+gaps.outer.top =        4
+gaps.outer.right =      4
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -119,62 +118,51 @@ automatically-unhide-macos-hidden-apps = true
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+    alt-0 = 'workspace 0'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
     alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
     alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
+    alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
+    alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
+    alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
+    alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
+    alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
+    alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+    alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'focus-back-and-forth'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    alt-s = 'mode service'
-    # alt-m = 'mode monitor'
-
-	# Monitor binding
-	alt-u = 'focus-monitor prev'
-	alt-i = 'focus-monitor next'
-
-	alt-shift-u = 'move-node-to-monitor prev --focus-follows-window'
-	alt-shift-i = 'move-node-to-monitor next --focus-follows-window'
-
-	# Disable annoying and useless "hide application" shortcut
-	cmd-h = []
-	cmd-alt-h = []
+    alt-semicolon = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-    r = ['reload-config', 'mode main']
     esc = 'mode main'
 
 	# See: https://nikitabobko.github.io/AeroSpace/commands#flatten-workspace-tree
-    backspace = ['flatten-workspace-tree', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
 
 	# See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    f = ['layout floating tiling', 'mode main']
-
-	# See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
-    z = ['fullscreen', 'mode main']
+    f = 'layout floating tiling'
 
 	# See: https://nikitabobko.github.io/AeroSpace/commands#join-with
-    alt-h = ['join-with left', 'mode main']
-    alt-j = ['join-with down', 'mode main']
-    alt-k = ['join-with up', 'mode main']
-    alt-l = ['join-with right', 'mode main']
-
-# 'monitor' binding mode declaration.
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# [mode.monitor.binding]
-# 	# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-monitor
-# 	alt-shift-h = ['move-workspace-to-monitor left', 'mode main']
-# 	alt-shift-j = ['move-workspace-to-monitor down', 'mode main']
-# 	alt-shift-k = ['move-workspace-to-monitor up', 'mode main']
-# 	alt-shift-l = ['move-workspace-to-monitor right', 'mode main']
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
 
 # Assign workspaces to monitors
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
 	1 = 'main'
-	3 = 'secondary'
+	0 = 'secondary'
